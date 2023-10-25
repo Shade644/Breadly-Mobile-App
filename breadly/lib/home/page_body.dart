@@ -60,6 +60,88 @@ class _PageBodyState extends State<PageBody> {
     activeShape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
   ),
 ),
+  SizedBox(height: Dimensions.height30,),
+
+  Container(
+    margin: EdgeInsets.only(left:Dimensions.height30),
+    child: Row(
+      crossAxisAlignment: CrossAxisAlignment.end,
+      children: [
+      BigText(text: "Polecane"),
+    ],),
+  ),
+
+    ListView.builder(
+      physics: const NeverScrollableScrollPhysics(),
+      shrinkWrap: true,
+    itemCount: 10,
+    itemBuilder: (context, index){
+      return Container(
+        margin: EdgeInsets.only(left: Dimensions.width20, right: Dimensions.width20,bottom: Dimensions.height10),
+        child: Row(
+          children: [
+          Container(
+            width: Dimensions.listViewImgSize,
+            height: Dimensions.listViewImgSize ,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(Dimensions.radius20),
+              color: Colors.white38,
+              image: DecorationImage(
+                fit:BoxFit.cover,
+                image: AssetImage("assets/images/paczek.jpg") 
+                )
+            ),
+          ),
+          Expanded(
+            child: Container(
+              height: Dimensions.listViewTextContSize,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(
+                  topRight: Radius.circular(Dimensions.radius20),
+                  bottomRight: Radius.circular(Dimensions.radius20),
+                ),
+                color: Colors.white,
+              ),
+              child: Padding(
+                padding: EdgeInsets.only(left: Dimensions.width20,right: Dimensions.width10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    BigText(text: "Chleb Poznański"),
+                    SizedBox(height: Dimensions.height10,),
+                    SmallText(text: "Opis Cały Ten"),
+                    SizedBox(height: Dimensions.height10,),
+                     Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: const [
+                IconText(
+                  icon: Icons.circle_sharp, 
+                  text: "Normal", 
+                  iconColor: Colors.orange
+                  ),
+                    IconText(
+                  icon: Icons.location_on, 
+                  text: "1,7 km", 
+                  iconColor: Colors.green
+                  ),
+                    IconText(
+                  icon: Icons.access_time_rounded, 
+                  text: "32min", 
+                  iconColor: Colors.redAccent
+                  ),
+              ],)
+                  ],
+                ),
+              ),
+            ),
+            
+          )
+        ]
+        ),
+      );
+    }
+  )
       ],
     );
   }

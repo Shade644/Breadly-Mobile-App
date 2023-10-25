@@ -51,7 +51,10 @@ class _MainPageState extends State<MainPage> {
           ],
           ),
       ),
-      const PageBody(),
+      const Expanded(
+        child: SingleChildScrollView(
+          child: PageBody(),
+          ))
       
     ],
     ),

@@ -26,4 +26,8 @@ class Dimensions{
     static double radius30 = screenHeight/28.13;
      static double radius15 = screenHeight/56.27;
       static double icon24 = screenHeight/35.17;
+
+
+      static double listViewImgSize = screenWidth/3.25;
+      static double listViewTextContSize = screenWidth/3.9;
 }
