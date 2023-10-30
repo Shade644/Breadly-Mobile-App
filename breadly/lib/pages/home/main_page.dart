@@ -1,8 +1,8 @@
-import 'package:breadly/home/page_body.dart';
+import 'package:breadly/pages/home/page_body.dart';
 import 'package:breadly/utils/dimensions.dart';
 import 'package:breadly/widgets/Small_text.dart';
 import 'package:flutter/material.dart';
-import '../widgets/Big_text.dart';
+import '../../widgets/Big_text.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});

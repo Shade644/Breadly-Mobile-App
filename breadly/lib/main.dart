@@ -1,6 +1,8 @@
+import 'package:breadly/pages/food/detail.dart';
+import 'package:breadly/pages/food/recommeended.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'home/main_page.dart';
+import 'pages/home/main_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,7 +14,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: MainPage(),
+      //home: MainPage(),
+      // home: DetailFood(),
+      home: RecommenededFood(),
     );
   }
 }

@@ -1,6 +1,7 @@
 import 'package:breadly/utils/dimensions.dart';
 import 'package:breadly/widgets/Big_text.dart';
 import 'package:breadly/widgets/Small_text.dart';
+import 'package:breadly/widgets/app_column.dart';
 import 'package:breadly/widgets/icon_and_text.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
@@ -213,44 +214,7 @@ class _PageBodyState extends State<PageBody> {
           ),
           child: Container(
             padding:  EdgeInsets.only(top:Dimensions.height10, left:Dimensions.width15, right:Dimensions.width30),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-              BigText(text: "Chleb"),
-              SizedBox(height:Dimensions.height10,),
-              Row(children: [
-                Wrap(
-                  children: List.generate(5, (index) => const Icon(Icons.star,color:Colors.amberAccent,size: 18,))
-                ),
-                 SizedBox(width:Dimensions.width10,),
-                SmallText(text: "4.5"),
-                 SizedBox(width: Dimensions.width10,),
-                SmallText(text: "30"),
-                SizedBox(width: Dimensions.width1,),
-                SmallText(text: "Ocen"),
-              ],),
-               SizedBox(height: Dimensions.height20,),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: const [
-                IconText(
-                  icon: Icons.circle_sharp, 
-                  text: "Normal", 
-                  iconColor: Colors.orange
-                  ),
-                    IconText(
-                  icon: Icons.location_on, 
-                  text: "1,7 km", 
-                  iconColor: Colors.green
-                  ),
-                    IconText(
-                  icon: Icons.access_time_rounded, 
-                  text: "32min", 
-                  iconColor: Colors.redAccent
-                  ),
-              ],)
-    
-            ]),
+            child: AppColumn(text:"Chleb"),
           ),
         ),
         
