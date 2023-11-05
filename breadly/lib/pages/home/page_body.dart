@@ -1,3 +1,9 @@
+import 'package:breadly/controllers/popular_product_controller.dart';
+import 'package:breadly/controllers/recommended_product_controller.dart';
+import 'package:breadly/models/product_model.dart';
+import 'package:breadly/pages/food/detail.dart';
+import 'package:breadly/routes/route_helper.dart';
+import 'package:breadly/utils/app_constants.dart';
 import 'package:breadly/utils/dimensions.dart';
 import 'package:breadly/widgets/Big_text.dart';
 import 'package:breadly/widgets/Small_text.dart';
@@ -5,6 +11,7 @@ import 'package:breadly/widgets/app_column.dart';
 import 'package:breadly/widgets/icon_and_text.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 
 class PageBody extends StatefulWidget {
@@ -21,6 +28,7 @@ class _PageBodyState extends State<PageBody> {
    var _currPageValue=0.0;
    double _scaleFactor=0.8;
   double _height=Dimensions.pageViewContainer;
+  
    @override
   void initState(){
     super.initState();
@@ -40,27 +48,40 @@ class _PageBodyState extends State<PageBody> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Container(
-          // color: Colors.redAccent,
-          height: Dimensions.pageView,
-          child: PageView.builder(
-            controller: pageController,
-            itemCount: 5,
-            itemBuilder: (context, position){
-              return _buildPageItem(
-                position
-          );},
+       GetBuilder<PopularProductController>(builder: (popularProducts){
+          return popularProducts.isLoaded?
+          Container(
+            // color: Colors.redAccent,
+            height: Dimensions.pageView,
+            child: GestureDetector(
+              onTap: () {
+                Get.toNamed(RouteHelper.getDetailFood());
+              },
+              child: PageView.builder(
+                controller: pageController,
+                itemCount: popularProducts.popularProductList.length,
+                itemBuilder: (context, position){
+                  return _buildPageItem(
+                    position,
+                    popularProducts.popularProductList[position],
+              );},
+                ),
             ),
-        ),
-    DotsIndicator(
-  dotsCount: 5,
+          ): CircularProgressIndicator(
+            color: Colors.blueAccent
+          );
+        }),
+GetBuilder<PopularProductController>(builder: (popularProducts){
+     return DotsIndicator(
+ dotsCount: popularProducts.popularProductList.isEmpty?1 : popularProducts.popularProductList.length, // to do poprawy
   position: _currPageValue.toInt(),
   decorator: DotsDecorator(
     size: const Size.square(9.0),
     activeSize: const Size(18.0, 9.0),
     activeShape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
   ),
-),
+);
+}),
   SizedBox(height: Dimensions.height30,),
 
   Container(
@@ -71,11 +92,12 @@ class _PageBodyState extends State<PageBody> {
       BigText(text: "Polecane"),
     ],),
   ),
-
+GetBuilder<RecommendedProductController>(builder: (recommendedProduct){
+    return recommendedProduct.isLoaded?
     ListView.builder(
       physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
-    itemCount: 10,
+    itemCount: recommendedProduct.recommendedProductList.length,
     itemBuilder: (context, index){
       return Container(
         margin: EdgeInsets.only(left: Dimensions.width20, right: Dimensions.width20,bottom: Dimensions.height10),
@@ -89,9 +111,11 @@ class _PageBodyState extends State<PageBody> {
               color: Colors.white38,
               image: DecorationImage(
                 fit:BoxFit.cover,
-                image: AssetImage("assets/images/paczek.jpg") 
-                )
+                image: NetworkImage(
+              AppConstants.BASE_URL+AppConstants.UPLOUD_URL+recommendedProduct.recommendedProductList[index].img!
             ),
+            ),
+          ),
           ),
           Expanded(
             child: Container(
@@ -109,7 +133,7 @@ class _PageBodyState extends State<PageBody> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    BigText(text: "Chleb Poznański"),
+                    BigText(text: recommendedProduct.recommendedProductList[index].name!),
                     SizedBox(height: Dimensions.height10,),
                     SmallText(text: "Opis Cały Ten"),
                     SizedBox(height: Dimensions.height10,),
@@ -142,11 +166,14 @@ class _PageBodyState extends State<PageBody> {
         ),
       );
     }
-  )
+  ): CircularProgressIndicator(
+    color: Colors.blueAccent,
+  );
+  })
       ],
     );
   }
-  Widget _buildPageItem(int index){
+  Widget _buildPageItem(int index, ProductModel popularProduct){
     Matrix4 matrix = Matrix4.identity();
     if(index == _currPageValue.floor()){
       var currScale = 1-(_currPageValue-index)*(1-_scaleFactor);
@@ -182,9 +209,11 @@ class _PageBodyState extends State<PageBody> {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(Dimensions.radius30),
           color: index.isEven?const Color(0xFF69c5df):const Color(0xFF9294cc),
-          image: const DecorationImage(
+          image: DecorationImage(
             fit: BoxFit.cover,
-            image: AssetImage("assets/images/bread.png"),
+            image: NetworkImage(
+              AppConstants.BASE_URL+AppConstants.UPLOUD_URL+popularProduct.img!
+            ),
             ),
         ),
       ),
@@ -214,7 +243,7 @@ class _PageBodyState extends State<PageBody> {
           ),
           child: Container(
             padding:  EdgeInsets.only(top:Dimensions.height10, left:Dimensions.width15, right:Dimensions.width30),
-            child: AppColumn(text:"Chleb"),
+            child: AppColumn(text:popularProduct.name!),
           ),
         ),
         

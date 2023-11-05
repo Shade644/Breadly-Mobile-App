@@ -1,5 +1,8 @@
+import 'package:breadly/controllers/popular_product_controller.dart';
+import 'package:breadly/controllers/recommended_product_controller.dart';
 import 'package:breadly/pages/food/detail.dart';
 import 'package:breadly/pages/food/recommeended.dart';
+import 'package:breadly/routes/route_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'pages/home/main_page.dart';
@@ -15,11 +18,13 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
-    return const GetMaterialApp(
+    Get.find<PopularProductController>().getPopularProductList();
+    Get.find<RecommendedProductController>().getRecommendedProductList();
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      //home: MainPage(),
-      // home: DetailFood(),
-      home: RecommenededFood(),
+      home: MainPage(),
+     initialRoute: RouteHelper.initial,
+     getPages: RouteHelper.routes,
     );
   }
 }

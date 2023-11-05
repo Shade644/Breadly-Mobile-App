@@ -1,3 +1,4 @@
+import 'package:breadly/pages/home/main_page.dart';
 import 'package:breadly/utils/dimensions.dart';
 import 'package:breadly/widgets/app_column.dart';
 import 'package:breadly/widgets/app_icon.dart';
@@ -5,6 +6,7 @@ import 'package:breadly/widgets/expandable_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:get/get.dart';
 
 import '../../widgets/Big_text.dart';
 import '../../widgets/Small_text.dart';
@@ -43,7 +45,11 @@ class DetailFood extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              AppIcon(icon: Icons.arrow_back_ios),
+              GestureDetector(
+                onTap: () {
+                  Get.to(()=>MainPage());
+                },
+                child: AppIcon(icon: Icons.arrow_back_ios)),
               AppIcon(icon: Icons.shopping_cart_outlined)
          ],)),
          Positioned(
