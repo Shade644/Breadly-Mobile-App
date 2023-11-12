@@ -53,10 +53,6 @@ class _PageBodyState extends State<PageBody> {
           Container(
             // color: Colors.redAccent,
             height: Dimensions.pageView,
-            child: GestureDetector(
-              onTap: () {
-                Get.toNamed(RouteHelper.getDetailFood());
-              },
               child: PageView.builder(
                 controller: pageController,
                 itemCount: popularProducts.popularProductList.length,
@@ -66,7 +62,6 @@ class _PageBodyState extends State<PageBody> {
                     popularProducts.popularProductList[position],
               );},
                 ),
-            ),
           ): CircularProgressIndicator(
             color: Colors.blueAccent
           );
@@ -99,70 +94,75 @@ GetBuilder<RecommendedProductController>(builder: (recommendedProduct){
       shrinkWrap: true,
     itemCount: recommendedProduct.recommendedProductList.length,
     itemBuilder: (context, index){
-      return Container(
-        margin: EdgeInsets.only(left: Dimensions.width20, right: Dimensions.width20,bottom: Dimensions.height10),
-        child: Row(
-          children: [
-          Container(
-            width: Dimensions.listViewImgSize,
-            height: Dimensions.listViewImgSize ,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(Dimensions.radius20),
-              color: Colors.white38,
-              image: DecorationImage(
-                fit:BoxFit.cover,
-                image: NetworkImage(
-              AppConstants.BASE_URL+AppConstants.UPLOUD_URL+recommendedProduct.recommendedProductList[index].img!
-            ),
-            ),
-          ),
-          ),
-          Expanded(
-            child: Container(
-              height: Dimensions.listViewTextContSize,
+      return GestureDetector(
+        onTap: (){
+          Get.toNamed(RouteHelper.getRecommendedFood(index));
+        },
+        child: Container(
+          margin: EdgeInsets.only(left: Dimensions.width20, right: Dimensions.width20,bottom: Dimensions.height10),
+          child: Row(
+            children: [
+            Container(
+              width: Dimensions.listViewImgSize,
+              height: Dimensions.listViewImgSize ,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(
-                  topRight: Radius.circular(Dimensions.radius20),
-                  bottomRight: Radius.circular(Dimensions.radius20),
-                ),
-                color: Colors.white,
+                borderRadius: BorderRadius.circular(Dimensions.radius20),
+                color: Colors.white38,
+                image: DecorationImage(
+                  fit:BoxFit.cover,
+                  image: NetworkImage(
+                AppConstants.BASE_URL+AppConstants.UPLOUD_URL+recommendedProduct.recommendedProductList[index].img!
               ),
-              child: Padding(
-                padding: EdgeInsets.only(left: Dimensions.width20,right: Dimensions.width10),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    BigText(text: recommendedProduct.recommendedProductList[index].name!),
-                    SizedBox(height: Dimensions.height10,),
-                    SmallText(text: "Opis Cały Ten"),
-                    SizedBox(height: Dimensions.height10,),
-                     Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: const [
-                IconText(
-                  icon: Icons.circle_sharp, 
-                  text: "Normal", 
-                  iconColor: Colors.orange
-                  ),
-                    IconText(
-                  icon: Icons.location_on, 
-                  text: "1,7 km", 
-                  iconColor: Colors.green
-                  ),
-                    IconText(
-                  icon: Icons.access_time_rounded, 
-                  text: "32min", 
-                  iconColor: Colors.redAccent
-                  ),
-              ],)
-                  ],
-                ),
               ),
             ),
-            
-          )
-        ]
+            ),
+            Expanded(
+              child: Container(
+                height: Dimensions.listViewTextContSize,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                    topRight: Radius.circular(Dimensions.radius20),
+                    bottomRight: Radius.circular(Dimensions.radius20),
+                  ),
+                  color: Colors.white,
+                ),
+                child: Padding(
+                  padding: EdgeInsets.only(left: Dimensions.width20,right: Dimensions.width10),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      BigText(text: recommendedProduct.recommendedProductList[index].name!),
+                      SizedBox(height: Dimensions.height10,),
+                      SmallText(text: "Opis Cały Ten"),
+                      SizedBox(height: Dimensions.height10,),
+                       Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: const [
+                  IconText(
+                    icon: Icons.circle_sharp, 
+                    text: "Normal", 
+                    iconColor: Colors.orange
+                    ),
+                      IconText(
+                    icon: Icons.location_on, 
+                    text: "1,7 km", 
+                    iconColor: Colors.green
+                    ),
+                      IconText(
+                    icon: Icons.access_time_rounded, 
+                    text: "32min", 
+                    iconColor: Colors.redAccent
+                    ),
+                ],)
+                    ],
+                  ),
+                ),
+              ),
+              
+            )
+          ]
+          ),
         ),
       );
     }
@@ -198,25 +198,30 @@ GetBuilder<RecommendedProductController>(builder: (recommendedProduct){
                 matrix = Matrix4.diagonal3Values(1, currScale, 1)..setTranslationRaw(0, _height*(1-_scaleFactor)/2, 1);
 
     }
-
     return Transform(
       transform: matrix,
       child: Stack(
         children: [
-          Container(
-        height: Dimensions.pageViewContainer,
-        margin:  EdgeInsets.only(left:Dimensions.width10, right: Dimensions.width10,),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(Dimensions.radius30),
-          color: index.isEven?const Color(0xFF69c5df):const Color(0xFF9294cc),
-          image: DecorationImage(
-            fit: BoxFit.cover,
-            image: NetworkImage(
-              AppConstants.BASE_URL+AppConstants.UPLOUD_URL+popularProduct.img!
-            ),
-            ),
-        ),
-      ),
+          GestureDetector(
+             onTap: () {
+
+                Get.toNamed(RouteHelper.getDetailFood(index));
+              },
+            child: Container(
+                  height: Dimensions.pageViewContainer,
+                  margin:  EdgeInsets.only(left:Dimensions.width10, right: Dimensions.width10,),
+                  decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(Dimensions.radius30),
+            color: index.isEven?const Color(0xFF69c5df):const Color(0xFF9294cc),
+            image: DecorationImage(
+              fit: BoxFit.cover,
+              image: NetworkImage(
+                AppConstants.BASE_URL+AppConstants.UPLOUD_URL+popularProduct.img!
+              ),
+              ),
+                  ),
+                ),
+          ),
       Align(
         alignment: Alignment.bottomCenter,
         child: Container(

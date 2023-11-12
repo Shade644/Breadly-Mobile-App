@@ -1,32 +1,44 @@
+import 'package:breadly/controllers/recommended_product_controller.dart';
+import 'package:breadly/routes/route_helper.dart';
+import 'package:breadly/utils/app_constants.dart';
 import 'package:breadly/utils/dimensions.dart';
 import 'package:breadly/widgets/app_icon.dart';
 import 'package:breadly/widgets/expandable_text.dart';
 import 'package:flutter/material.dart';
-
+import 'package:get/get.dart';
 import '../../widgets/Big_text.dart';
 
 class RecommenededFood extends StatelessWidget {
-  const RecommenededFood({super.key});
+  int pageID;
+   RecommenededFood({super.key, required this.pageID});
 
   @override
   Widget build(BuildContext context) {
+    var product = Get.find<RecommendedProductController>().recommendedProductList[pageID];
     return Scaffold(
       backgroundColor: Colors.white,
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
+            automaticallyImplyLeading: false,
             toolbarHeight: 70,
             title: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                AppIcon(icon: Icons.clear),
-                AppIcon(icon: Icons.shopping_cart_outlined),
-            ]),
+              GestureDetector(
+                onTap: (){
+                  Get.toNamed(RouteHelper.getInitial());
+                },
+                child:  AppIcon(icon: Icons.clear),
+              ),
+                    AppIcon(icon: Icons.shopping_cart_outlined),
+                ],
+              ),
             bottom: PreferredSize(
               preferredSize: Size.fromHeight(20),
               child: Container(
                 child: Center(
-                  child: BigText(size:Dimensions.font26, text: "Pączki")
+                  child: BigText(size:Dimensions.font26, text: product.name!)
                   ),
                 width: double.maxFinite,
                 padding: EdgeInsets.only(top:5,bottom: 10),
@@ -43,8 +55,8 @@ class RecommenededFood extends StatelessWidget {
             backgroundColor: Color.fromARGB(255, 102, 149, 26),
             expandedHeight: 300,
             flexibleSpace: FlexibleSpaceBar(
-              background: Image.asset(
-                "assets/images/paczek.jpg",
+              background: Image.network(
+                AppConstants.BASE_URL+AppConstants.UPLOUD_URL+product.img!,
                 width: double.maxFinite,
                 fit: BoxFit.cover,
                 ),
@@ -56,7 +68,7 @@ class RecommenededFood extends StatelessWidget {
                 Container(
                   margin: EdgeInsets.only(left:Dimensions.width20,right: Dimensions.width20),
                   child: ExpandableTextWidget(
-                    text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis tristique sollicitudin nibh sit amet. Vitae nunc sed velit dignissim sodales. Posuere lorem ipsum dolor sit amet. Lacus laoreet non curabitur gravida arcu ac tortor. Dui vivamus arcu felis bibendum ut tristique et egestas. Morbi enim nunc faucibus a pellentesque sit amet porttitor eget. Aliquet sagittis id consectetur purus ut faucibus pulvinar elementum integer. Tincidunt augue interdum velit euismod in pellentesque massa. Metus dictum at tempor commodo ullamcorper a. Ipsum suspendisse ultrices gravida dictum fusce ut. Tincidunt augue interdum velit euismod in pellentesque massa. Volutpat ac tincidunt vitae semper quis lectus nulla at. Aliquet eget sit amet tellus cras. Quis blandit turpis cursus in. Viverra aliquet eget sit amet tellus cras adipiscing enim eu. At tellus at urna condimentum. Pharetra vel turpis nunc eget lorem dolor sed. Maecenas pharetra convallis posuere morbi leo. Rhoncus urna neque viverra justo nec ultrices dui sapien eget. Sed turpis tincidunt id aliquet risus. Eget gravida cum sociis natoque penatibus et magnis dis. Diam quis enim lobortis scelerisque fermentum. Sodales ut etiam sit amet nisl purus. Enim blandit volutpat maecenas volutpat blandit. Suscipit adipiscing bibendum est ultricies integer quis auctor elit. Enim diam vulputate ut pharetra sit amet.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis tristique sollicitudin nibh sit amet. Vitae nunc sed velit dignissim sodales. Posuere lorem ipsum dolor sit amet. Lacus laoreet non curabitur gravida arcu ac tortor. Dui vivamus arcu felis bibendum ut tristique et egestas. Morbi enim nunc faucibus a pellentesque sit amet porttitor eget. Aliquet sagittis id consectetur purus ut faucibus pulvinar elementum integer. Tincidunt augue interdum velit euismod in pellentesque massa. Metus dictum at tempor commodo ullamcorper a. Ipsum suspendisse ultrices gravida dictum fusce ut. Tincidunt augue interdum velit euismod in pellentesque massa. Volutpat ac tincidunt vitae semper quis lectus nulla at. Aliquet eget sit amet tellus cras. Quis blandit turpis cursus in. Viverra aliquet eget sit amet tellus cras adipiscing enim eu. At tellus at urna condimentum. Pharetra vel turpis nunc eget lorem dolor sed. Maecenas pharetra convallis posuere morbi leo. Rhoncus urna neque viverra justo nec ultrices dui sapien eget. Sed turpis tincidunt id aliquet risus. Eget gravida cum sociis natoque penatibus et magnis dis. Diam quis enim lobortis scelerisque fermentum. Sodales ut etiam sit amet nisl purus. Enim blandit volutpat maecenas volutpat blandit. Suscipit adipiscing bibendum est ultricies integer quis auctor elit. Enim diam vulputate ut pharetra sit amet.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis tristique sollicitudin nibh sit amet. Vitae nunc sed velit dignissim sodales. Posuere lorem ipsum dolor sit amet. Lacus laoreet non curabitur gravida arcu ac tortor. Dui vivamus arcu felis bibendum ut tristique et egestas. Morbi enim nunc faucibus a pellentesque sit amet porttitor eget. Aliquet sagittis id consectetur purus ut faucibus pulvinar elementum integer. Tincidunt augue interdum velit euismod in pellentesque massa. Metus dictum at tempor commodo ullamcorper a. Ipsum suspendisse ultrices gravida dictum fusce ut. Tincidunt augue interdum velit euismod in pellentesque massa. Volutpat ac tincidunt vitae semper quis lectus nulla at. Aliquet eget sit amet tellus cras. Quis blandit turpis cursus in. Viverra aliquet eget sit amet tellus cras adipiscing enim eu. At tellus at urna condimentum. Pharetra vel turpis nunc eget lorem dolor sed. Maecenas pharetra convallis posuere morbi leo. Rhoncus urna neque viverra justo nec ultrices dui sapien eget. Sed turpis tincidunt id aliquet risus. Eget gravida cum sociis natoque penatibus et magnis dis. Diam quis enim lobortis scelerisque fermentum. Sodales ut etiam sit amet nisl purus. Enim blandit volutpat maecenas volutpat blandit. Suscipit adipiscing bibendum est ultricies integer quis auctor elit. Enim diam vulputate ut pharetra sit amet.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis tristique sollicitudin nibh sit amet. Vitae nunc sed velit dignissim sodales. Posuere lorem ipsum dolor sit amet. Lacus laoreet non curabitur gravida arcu ac tortor. Dui vivamus arcu felis bibendum ut tristique et egestas. Morbi enim nunc faucibus a pellentesque sit amet porttitor eget. Aliquet sagittis id consectetur purus ut faucibus pulvinar elementum integer. Tincidunt augue interdum velit euismod in pellentesque massa. Metus dictum at tempor commodo ullamcorper a. Ipsum suspendisse ultrices gravida dictum fusce ut. Tincidunt augue interdum velit euismod in pellentesque massa. Volutpat ac tincidunt vitae semper quis lectus nulla at. Aliquet eget sit amet tellus cras. Quis blandit turpis cursus in. Viverra aliquet eget sit amet tellus cras adipiscing enim eu. At tellus at urna condimentum. Pharetra vel turpis nunc eget lorem dolor sed. Maecenas pharetra convallis posuere morbi leo. Rhoncus urna neque viverra justo nec ultrices dui sapien eget. Sed turpis tincidunt id aliquet risus. Eget gravida cum sociis natoque penatibus et magnis dis. Diam quis enim lobortis scelerisque fermentum. Sodales ut etiam sit amet nisl purus. Enim blandit volutpat maecenas volutpat blandit. Suscipit adipiscing bibendum est ultricies integer quis auctor elit. Enim diam vulputate ut pharetra sit amet."
+                    text: product.description!,
                     ),
                 )
             ],)
@@ -82,7 +94,7 @@ class RecommenededFood extends StatelessWidget {
                   backgroundColor: Colors.blueAccent,
                    icon: Icons.remove
                    ),
-                   BigText(text: "6,99 zł"+" x "+"0",size:Dimensions.font26),
+                   BigText(text: "${product.price!} zł"+" x "+"0",size:Dimensions.font26),
                 AppIcon(
                   iconSize: Dimensions.icon24,
                   iconColor:Colors.white,
