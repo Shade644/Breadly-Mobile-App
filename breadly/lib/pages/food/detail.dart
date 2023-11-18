@@ -1,5 +1,6 @@
 import 'package:breadly/controllers/cart_controller.dart';
 import 'package:breadly/controllers/popular_product_controller.dart';
+import 'package:breadly/pages/cart/cart_page.dart';
 import 'package:breadly/pages/home/main_page.dart';
 import 'package:breadly/utils/app_constants.dart';
 import 'package:breadly/utils/dimensions.dart';
@@ -19,7 +20,7 @@ class DetailFood extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var product = Get.find<PopularProductController>().popularProductList[pageID];
-  Get.find<PopularProductController>().initProduct(Get.find<CartController>());
+  Get.find<PopularProductController>().initProduct(product, Get.find<CartController>());
     return Scaffold(
       backgroundColor: Colors.white,
       body: Stack(
@@ -53,7 +54,43 @@ class DetailFood extends StatelessWidget {
                   Get.to(()=>MainPage());
                 },
                 child: AppIcon(icon: Icons.arrow_back_ios)),
-              AppIcon(icon: Icons.shopping_cart_outlined)
+              
+             GetBuilder<PopularProductController>(builder: (controller){
+              return Stack(
+                children: [
+                   AppIcon(icon: Icons.shopping_cart_outlined),
+                   Get.find<PopularProductController>().totalItems >=1?
+                   Positioned(
+                    right: 0,
+                    top:0,
+                     child: GestureDetector(
+                         onTap: (){
+                        Get.to(()=>CartPage());
+                      },
+                       child: AppIcon(icon: Icons.circle, 
+                       size: 20, 
+                       iconColor: Colors.transparent, 
+                       backgroundColor: Color.fromARGB(255, 249, 100, 100),
+                       ),
+                     ),
+                   ):
+                   Container(),
+                   Get.find<PopularProductController>().totalItems >=1?
+                   Positioned(
+                    right: 6,
+                    top:3,
+                     child: BigText(
+                      text:Get.find<PopularProductController>().totalItems.toString(),
+                     size: 12,
+                     color: Colors.white,
+                     ),
+                   ):
+                   Container(),                   
+                   
+                   
+                ],
+              ); 
+             },)
          ],)),
          Positioned(
           left: 0,
@@ -119,7 +156,7 @@ class DetailFood extends StatelessWidget {
                       Icons.remove, color: Colors.black
                       )),
                     SizedBox(width: Dimensions.width10/2),
-                    BigText(text: popularProduct.quantity.toString()),
+                    BigText(text: popularProduct.inCartItems.toString()),
                     SizedBox(width: Dimensions.width10/2),
                     GestureDetector(
                       onTap: () {
@@ -130,19 +167,20 @@ class DetailFood extends StatelessWidget {
                       )),
                 ],)
               ),
-              Container(
-                padding: EdgeInsets.only(top:Dimensions.height20,bottom: Dimensions.height20,left: Dimensions.width20,right: Dimensions.width20),
-                 child: GestureDetector(
+              GestureDetector(
                   onTap: () {
                     popularProduct.addItem(product);
                   },
-                  child: BigText(
-                    text: "${product.price!} zł | Do Koszyka",
-                    color: Colors.white
-                    )),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(Dimensions.radius20),
-                  color: Colors.blueAccent,
+                child: Container(
+                  padding: EdgeInsets.only(top:Dimensions.height20,bottom: Dimensions.height20,left: Dimensions.width20,right: Dimensions.width20),
+                    child: BigText(
+                      text: "${product.price!} zł | Do Koszyka",
+                      color: Colors.white
+                      ),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(Dimensions.radius20),
+                    color: Colors.blueAccent,
+                  ),
                 ),
               )
            ]));

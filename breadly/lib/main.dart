@@ -1,5 +1,6 @@
 import 'package:breadly/controllers/popular_product_controller.dart';
 import 'package:breadly/controllers/recommended_product_controller.dart';
+import 'package:breadly/pages/cart/cart_page.dart';
 import 'package:breadly/pages/food/detail.dart';
 import 'package:breadly/pages/food/recommeended.dart';
 import 'package:breadly/pages/home/page_body.dart';
@@ -24,6 +25,8 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       home: MainPage(),
+      // home: CartPage(),
+      
      initialRoute: RouteHelper.initial,
      getPages: RouteHelper.routes,
     );

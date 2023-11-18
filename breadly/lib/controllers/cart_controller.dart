@@ -12,8 +12,10 @@ class CartController extends GetxController{
   Map<int, CartModel> get items => _items;
 
   void addItem(ProductModel product, int quantity){
+    var totalQuantity = 0;
     if(_items.containsKey(product.id!)){
       _items.update(product.id!, (value) {
+        totalQuantity = value.quantity!+quantity;
         return CartModel(
           id: value.id,
           name: value.name,
@@ -24,9 +26,13 @@ class CartController extends GetxController{
           time:DateTime.now().toString(),
         );
       });
+    if(totalQuantity<=0){
+      _items.remove(product.id);
+    }
     }
     else{
-    _items.putIfAbsent(product.id!, () => CartModel(
+      if(quantity>0){
+            _items.putIfAbsent(product.id!, () => CartModel(
       id: product.id,
       name: product.name,
       price: product.price,
@@ -34,7 +40,45 @@ class CartController extends GetxController{
       quantity: quantity,
       isExist: true,
       time:DateTime.now().toString(),
-    ));
+            ));
+      }
+     else{
+     Get.snackbar("Brak przedmiotów w koszyku", "Musisz mieć przynajmniej jednek przedmiot w koszyku"); 
+    }
+    
     }
   }
+ bool existInCart(ProductModel product){
+    if(_items.containsKey(product.id)){
+      return true;
+    }
+    return false;
+  }
+
+  int getQuantity(ProductModel product){
+    var quantity = 0;
+    if(_items.containsKey(product.id)){
+      _items.forEach((key, value) {
+        if(key == product.id){
+          quantity = value.quantity!;
+        }
+      });
+    }
+    return quantity;
+  }
+
+  int get totalItems {
+    var totalQuantity = 0;
+    _items.forEach((key, value) {
+      totalQuantity += value.quantity!;
+    });
+    return totalQuantity;
+  }
+
+  List<CartModel> get getItems {
+    return _items.entries.map((e){
+      return e.value;
+    }).toList();
+  }
+
 }
