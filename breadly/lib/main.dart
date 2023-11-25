@@ -23,11 +23,8 @@ class MyApp extends StatelessWidget {
     Get.find<PopularProductController>().getPopularProductList();
     Get.find<RecommendedProductController>().getRecommendedProductList();
     return GetMaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: MainPage(),
-      // home: CartPage(),
-      
-     initialRoute: RouteHelper.initial,
+      debugShowCheckedModeBanner: false,    
+     initialRoute: RouteHelper.getInitial(),
      getPages: RouteHelper.routes,
     );
   }

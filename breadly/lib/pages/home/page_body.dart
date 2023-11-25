@@ -42,6 +42,7 @@ class _PageBodyState extends State<PageBody> {
   @override
   void dispose() {
     pageController.dispose();
+    super.dispose();
   }
 
   @override
@@ -96,7 +97,7 @@ GetBuilder<RecommendedProductController>(builder: (recommendedProduct){
     itemBuilder: (context, index){
       return GestureDetector(
         onTap: (){
-          Get.toNamed(RouteHelper.getRecommendedFood(index));
+          Get.toNamed(RouteHelper.getRecommendedFood(index, "cartpage"));
         },
         child: Container(
           margin: EdgeInsets.only(left: Dimensions.width20, right: Dimensions.width20,bottom: Dimensions.height10),
@@ -205,7 +206,7 @@ GetBuilder<RecommendedProductController>(builder: (recommendedProduct){
           GestureDetector(
              onTap: () {
 
-                Get.toNamed(RouteHelper.getDetailFood(index));
+                Get.toNamed(RouteHelper.getDetailFood(index, "home"));
               },
             child: Container(
                   height: Dimensions.pageViewContainer,
