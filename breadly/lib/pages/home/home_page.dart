@@ -1,3 +1,4 @@
+import 'package:breadly/pages/cart/cart_history.dart';
 import 'package:breadly/pages/home/main_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -32,9 +33,7 @@ class _HomePageState extends State<HomePage> {
       Container(
         child: Center(child: Text("Next")),
       ),
-      Container(
-        child: Center(child: Text("Next 2")),
-      ),
+      CartHistory(),
       Container(
         child: Center(child: Text("Next 3")),
       ),
