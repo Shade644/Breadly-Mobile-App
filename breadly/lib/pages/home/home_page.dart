@@ -1,5 +1,7 @@
+import 'package:breadly/pages/auth/singup_page.dart';
 import 'package:breadly/pages/cart/cart_history.dart';
 import 'package:breadly/pages/home/main_page.dart';
+import 'package:breadly/pages/person/person_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
@@ -30,13 +32,9 @@ class _HomePageState extends State<HomePage> {
   List<Widget> _buildScreens() {
     return [
       MainPage(),
-      Container(
-        child: Center(child: Text("Next")),
-      ),
+      SingUpPage(),
       CartHistory(),
-      Container(
-        child: Center(child: Text("Next 3")),
-      ),
+        PersonPage(),
     ];
   }
 
