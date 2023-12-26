@@ -1,3 +1,5 @@
+import 'dart:isolate';
+
 import 'package:breadly/utils/dimensions.dart';
 import 'package:flutter/material.dart';
 
@@ -5,8 +7,9 @@ class AppTextFild extends StatelessWidget {
   final TextEditingController textController;
   final String hintText;
   final IconData icon;
+  bool isObscure;
 
-   AppTextFild ({Key? key, required this.textController,required this.hintText,required this.icon}) : super(key: key);
+   AppTextFild ({Key? key, required this.textController,required this.hintText,required this.icon, this.isObscure = false}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,10 +28,11 @@ class AppTextFild extends StatelessWidget {
               ]
             ),
             child: TextField(
+              obscureText: isObscure?true:false,
               controller: textController,
               decoration: InputDecoration(
                 hintText: hintText,
-                prefixIcon: Icon(Icons.email),
+                prefixIcon: Icon(icon),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(Dimensions.radius30),
                   borderSide: BorderSide(

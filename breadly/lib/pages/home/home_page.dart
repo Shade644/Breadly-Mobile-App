@@ -1,3 +1,4 @@
+import 'package:breadly/pages/auth/singin_page.dart';
 import 'package:breadly/pages/auth/singup_page.dart';
 import 'package:breadly/pages/cart/cart_history.dart';
 import 'package:breadly/pages/home/main_page.dart';
@@ -32,9 +33,9 @@ class _HomePageState extends State<HomePage> {
   List<Widget> _buildScreens() {
     return [
       MainPage(),
-      SingUpPage(),
+      Container(child: Text("Page"),),
       CartHistory(),
-        PersonPage(),
+      PersonPage(),
     ];
   }
 

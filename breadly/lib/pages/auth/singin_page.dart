@@ -1,7 +1,8 @@
 import 'package:breadly/base/custom_loader.dart';
 import 'package:breadly/base/show_message.dart';
 import 'package:breadly/controllers/auth_controller.dart';
-import 'package:breadly/models/signup_model.dart';
+import 'package:breadly/pages/auth/singup_page.dart';
+import 'package:breadly/routes/route_helper.dart';
 import 'package:breadly/utils/dimensions.dart';
 import 'package:breadly/widgets/Big_text.dart';
 import 'package:breadly/widgets/app_text_fild.dart';
@@ -10,37 +11,19 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 
-class SingUpPage extends StatelessWidget {
-  const SingUpPage({super.key});
+class SingInPage extends StatelessWidget {
+  const SingInPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     var emailController = TextEditingController();
     var passwordController = TextEditingController();
-    var nameController = TextEditingController();
-    var phoneController = TextEditingController();
-    var singUpIMG = [
-      "google.png",
-      "facebook.png",
-      "twitter.jpeg",
-    ];
 
-    void _registration(AuthController authController){
-      String name = nameController.text.trim();
-      String phone = phoneController.text.trim();
+        void _login(AuthController authController){
       String email = emailController.text.trim();
       String password = passwordController.text.trim();
 
-      if(name.isEmpty){
-        showMessage("Wpisz Imię",title: "Imię");
-      }
-      else if(phone.isEmpty){
-        showMessage("Wpisz Numer Telefonu",title: "Numer Telefonu");
-      } 
-      else if(phone.length<9){
-        showMessage("Niepoprawny Numer Telefonu",title: "Numer Telefonu");
-      }
-      else if(email.isEmpty){
+      if(email.isEmpty){
         showMessage("Wpisz Adres Email",title: "Email");
       }
       else if(!GetUtils.isEmail(email)){
@@ -49,19 +32,12 @@ class SingUpPage extends StatelessWidget {
       }else if(password.isEmpty){
         showMessage("Wpisz Hasło",title: "Hasło");
       }
-      else if(password.length<8){
-        showMessage("Hasło nie może być krótsze niż 8 znaków",title: "Krótkie hasło");
-      }
       else{
       showMessage("Brak błędów",title: "OK");
-      SignUpBody signUpBody = SignUpBody(
-        name: name, 
-        phone: phone, 
-        email: email, 
-        password: password
-        );
-        authController.registration(signUpBody).then((status){
+
+        authController.login(email,password).then((status){
           if(status.isSuccess){
+            Get.toNamed(RouteHelper.getInitial());
             print("success");
           }
           else{
@@ -72,8 +48,8 @@ class SingUpPage extends StatelessWidget {
     }
 
     return Scaffold(
-      body:GetBuilder<AuthController>(builder: (_authController){
-        return !_authController.isLoading?SingleChildScrollView(
+      body:GetBuilder<AuthController>(builder:(authController){
+        return !authController.isLoading?SingleChildScrollView(
           physics: BouncingScrollPhysics(),
           child: Column(
             children: [
@@ -89,6 +65,29 @@ class SingUpPage extends StatelessWidget {
                   ),
                 ),
               ),
+              Container(
+                margin: EdgeInsets.only(left: Dimensions.width20),
+                width: double.maxFinite,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Witaj",
+                      style: TextStyle(
+                        fontSize: Dimensions.font20*3,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      ),
+                    Text(
+                      "Zaloguj się do swojego konta!",
+                      style: TextStyle(
+                        fontSize: Dimensions.font20,
+                        color:Colors.grey[500],
+                      ),
+                      ),
+                ],)
+              ),
+            SizedBox(height: Dimensions.height20,),
             AppTextFild(
               textController: emailController,
               hintText: "Podaj adres email",
@@ -102,21 +101,9 @@ class SingUpPage extends StatelessWidget {
               isObscure: true,
             ),
             SizedBox(height: Dimensions.height20,),
-            AppTextFild(
-              textController: nameController,
-              hintText: "Imię",
-              icon:Icons.person,
-            ),
-            SizedBox(height: Dimensions.height20,),
-            AppTextFild(
-              textController: phoneController,
-              hintText: "Numer Telefonu",
-              icon:Icons.phone_android,
-            ),
-            SizedBox(height: Dimensions.height20,),
             GestureDetector(
-              onTap:() {
-                _registration(_authController);
+              onTap: (){
+                _login(authController);
               },
               child: Container(
                 width: Dimensions.screenWidth/2,
@@ -127,53 +114,42 @@ class SingUpPage extends StatelessWidget {
                 ),
                 child: Center(
                   child: BigText(
-                    text: "Zarejestruj się!",
+                    text: "Zaloguj się!",
                     size: Dimensions.font20*1.2,
                     color: Colors.white,
                     ),
                 ),
               ),
             ),
-            SizedBox(height: Dimensions.height10,),
-            RichText(
-              text: TextSpan(
-                recognizer: TapGestureRecognizer(
-        
-                )..onTap=()=>Get.back(),
-                text: "Masz już konto?",
-                style: TextStyle(
-                  color:Colors.black38,
-                  fontSize: Dimensions.font16/1.1,
-                )
-              )
-              ),
-              SizedBox(height: Dimensions.screenHeight*0.05,),
+            SizedBox(height: Dimensions.height15,),
               RichText(
               text: TextSpan(
-                text: "Zaloguj się przy użyciu",
+                text: " Nie masz konta? ",
                 style: TextStyle(
                   color:Colors.black38,
-                  fontSize: Dimensions.font16/1.1,
-                )
+                  fontSize: Dimensions.font16,
+                ),
+                children: [
+                  TextSpan(
+                    recognizer: TapGestureRecognizer(
+      
+                    )..onTap=()=>Get.to(()=>SingUpPage(), transition: Transition.fade),
+                text: "Stwórz je",
+                style: TextStyle(
+                  color:Colors.black38,
+                  fontSize: Dimensions.font16,
+                  fontWeight: FontWeight.bold,
+                ),
+                  )
+                ]
               )
               ),
-              Wrap(
-                children: List.generate(3, (index) => Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: CircleAvatar(
-                    radius: Dimensions.radius30,
-                    backgroundImage: AssetImage(
-                      "assets/images/"+singUpIMG[index]
-                    ),
-                  ),
-                )),
-              )
         
         
             ],),
         ):CustomLoader();
-        }
-      ),
+      }
+      )
     );
   }
 }

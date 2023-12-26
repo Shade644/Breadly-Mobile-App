@@ -1,6 +1,8 @@
 import 'package:breadly/controllers/cart_controller.dart';
 import 'package:breadly/controllers/popular_product_controller.dart';
 import 'package:breadly/controllers/recommended_product_controller.dart';
+import 'package:breadly/pages/auth/singin_page.dart';
+import 'package:breadly/pages/auth/singup_page.dart';
 import 'package:breadly/routes/route_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
