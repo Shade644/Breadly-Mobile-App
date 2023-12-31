@@ -1,8 +1,12 @@
+import 'package:breadly/controllers/auth_controller.dart';
+import 'package:breadly/controllers/cart_controller.dart';
+import 'package:breadly/routes/route_helper.dart';
 import 'package:breadly/utils/dimensions.dart';
 import 'package:breadly/widgets/Big_text.dart';
 import 'package:breadly/widgets/app_icon.dart';
 import 'package:breadly/widgets/person_widge.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class PersonPage extends StatelessWidget {
   const PersonPage({super.key});
@@ -84,21 +88,32 @@ class PersonPage extends StatelessWidget {
                       text: "Adres",
                     )),
                 SizedBox(height: Dimensions.height10),
-                PersonWidget(
-                    appIcon: AppIcon(
-                      icon: Icons.message,
-                      backgroundColor: Colors.redAccent,
-                      iconColor: Colors.white,
-                      iconSize: Dimensions.height30,
-                      size: Dimensions.height50,
-                    ),
-                    bigText: BigText(
-                      text: "?",
-                    )),
+                GestureDetector(
+                  onTap: (){
+                    if(Get.find<AuthController>().userLoggedIn()){
+                    Get.find<AuthController>().clearSharedData();
+                    Get.find<CartController>().clear();
+                    Get.find<CartController>().clearCartHistory();
+                    Get.offNamed(RouteHelper.getInitial());
+                    }
+
+                  },
+                  child: PersonWidget(
+                      appIcon: AppIcon(
+                        icon: Icons.logout_outlined,
+                        backgroundColor: Colors.redAccent,
+                        iconColor: Colors.white,
+                        iconSize: Dimensions.height30,
+                        size: Dimensions.height50,
+                      ),
+                      bigText: BigText(
+                        text: "Logout",
+                      )),
+                ),
                 SizedBox(height: Dimensions.height10),
                 PersonWidget(
                     appIcon: AppIcon(
-                      icon: Icons.message,
+                      icon: Icons.logout_outlined,
                       backgroundColor: Colors.redAccent,
                       iconColor: Colors.white,
                       iconSize: Dimensions.height30,

@@ -1,9 +1,6 @@
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
-from time import time
-import psycopg2
-from psycopg2.extras import RealDictCursor
 from .config import settings
 
 #postgresql://<username>:<password>@<ip-adress/hostname>/<database_name>
@@ -21,15 +18,3 @@ def get_db():
         yield db
     finally:
         db.close()
-
-#works only with raw sql, not orm
-# while True:
-#     try:
-#         conn = psycopg2.connect(host = 'localhost', dbname='Breadly', user='postgres', password='kuba123', cursor_factory=RealDictCursor)
-#         cursor = conn.cursor()
-#         print("DB Conn Succesfull!")
-#         break
-#     except Exception as error:
-#         print("DB Conn failed!")
-#         print(f"Error is: {error}")
-#         time.sleep(5)

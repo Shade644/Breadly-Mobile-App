@@ -18,5 +18,19 @@ localhost:5432
 docker-compose -f docker-compose-dev.yml up -d
 
 to do list:
--zeby pokazywał sie komunikat jak dodasz prosukt z taką samąnazwą 
--sprawdzic czy envy są poukrywane
+
+Konta użytkownika (luźne propozycję)
+- numer telefonu {x}
+- imię nazwisko {x}
+Produkty (must have)
+- podział long/short description {x}
+- img (może być jakaś ścieżka no co kolwiek) {x}
+Produkty (luźne propozycję)
+
+- Jakiś system ocen gwiazdki albo coś na wzór ocen w postach {x}
+
+na dolew bedzie uzywany /products. do slidera zroobic products/best i tam mająbyc  tylko produkty z oceną 5/5
+i ten licznijk produktów do slidera musi buc zrobiony na podstawie products/best {X}
+
+po zrobieniu wszzsytjego zrobic  noey alembic revision {x}
+

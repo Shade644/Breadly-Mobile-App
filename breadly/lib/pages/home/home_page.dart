@@ -33,7 +33,7 @@ class _HomePageState extends State<HomePage> {
   List<Widget> _buildScreens() {
     return [
       MainPage(),
-      Container(child: Text("Page"),),
+      SingInPage(),
       CartHistory(),
       PersonPage(),
     ];

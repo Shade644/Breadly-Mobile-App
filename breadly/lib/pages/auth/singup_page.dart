@@ -18,6 +18,7 @@ class SingUpPage extends StatelessWidget {
     var emailController = TextEditingController();
     var passwordController = TextEditingController();
     var nameController = TextEditingController();
+    var surnameController = TextEditingController();    
     var phoneController = TextEditingController();
     var singUpIMG = [
       "google.png",
@@ -27,6 +28,7 @@ class SingUpPage extends StatelessWidget {
 
     void _registration(AuthController authController){
       String name = nameController.text.trim();
+      String surname = surnameController.text.trim();      
       String phone = phoneController.text.trim();
       String email = emailController.text.trim();
       String password = passwordController.text.trim();
@@ -56,6 +58,7 @@ class SingUpPage extends StatelessWidget {
       showMessage("Brak błędów",title: "OK");
       SignUpBody signUpBody = SignUpBody(
         name: name, 
+        surname: surname,         
         phone: phone, 
         email: email, 
         password: password
@@ -107,6 +110,12 @@ class SingUpPage extends StatelessWidget {
               hintText: "Imię",
               icon:Icons.person,
             ),
+            SizedBox(height: Dimensions.height20,),
+            AppTextFild(
+              textController: surnameController,
+              hintText: "Nazwisko",
+              icon:Icons.person,
+            ),            
             SizedBox(height: Dimensions.height20,),
             AppTextFild(
               textController: phoneController,

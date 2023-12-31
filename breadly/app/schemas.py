@@ -1,4 +1,4 @@
-from pydantic import BaseModel, EmailStr, conint
+from pydantic import BaseModel, EmailStr
 from datetime import datetime
 from typing import Optional, List
 
@@ -16,6 +16,9 @@ class UserOut(BaseModel):
     id: int
     email: EmailStr
     created_at: datetime
+    name: str
+    surname: str
+    phone_number: int
 
     class Config:
         orm_mode = True
@@ -39,6 +42,9 @@ class PostOut(BaseModel):
 class UserCreate(BaseModel):
     email: EmailStr
     password: str
+    name : str
+    surname : str
+    phone_number : int
 
 
 class UserLogin(BaseModel):
@@ -57,22 +63,26 @@ class TokenData(BaseModel):
 
 class Vote(BaseModel):
     post_id: int
-    # dir: conint(le=1)
     dir: int
     
 
 class Product(BaseModel):
     id: int 
     name: str
+    short_description: str
     description : str
     price: float
     stock: int
+    img: Optional[str]
+    stars: int
 
 class ProductAdd(BaseModel):
     name: str
+    short_description: str
     description : str
     price: float
     stock: int
+    stars: int
 
     class Config:
         orm_mode = True
@@ -83,7 +93,6 @@ class DetailsOut(BaseModel):
     product_id: Optional[int] = None
     quantity: Optional[int] = None
     total_price: Optional[int] = None
-    #product_name: Optional[int] = None
     
 
     class Config:

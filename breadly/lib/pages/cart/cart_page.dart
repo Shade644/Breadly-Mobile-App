@@ -1,4 +1,5 @@
 import 'package:breadly/base/no_date_page.dart';
+import 'package:breadly/controllers/auth_controller.dart';
 import 'package:breadly/controllers/cart_controller.dart';
 import 'package:breadly/controllers/popular_product_controller.dart';
 import 'package:breadly/controllers/recommended_product_controller.dart';
@@ -219,7 +220,12 @@ class CartPage extends StatelessWidget {
                 ),
                 GestureDetector(
                     onTap: () {
+                     if(Get.find<AuthController>().userLoggedIn()){
                       CartController.addToHistory();
+                     }
+                     else{
+                      Get.toNamed(RouteHelper.getSingInPage());
+                     }
                     },
                   child: Container(
                     padding: EdgeInsets.only(top:Dimensions.height20,bottom: Dimensions.height20,left: Dimensions.width20,right: Dimensions.width20),

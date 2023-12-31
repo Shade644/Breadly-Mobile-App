@@ -1,3 +1,4 @@
+import 'package:breadly/pages/auth/singin_page.dart';
 import 'package:breadly/pages/cart/cart_page.dart';
 import 'package:breadly/pages/food/detail.dart';
 import 'package:breadly/pages/food/recommeended.dart';
@@ -12,17 +13,20 @@ class RouteHelper{
    static const String recommendedFood="/recommeended-food";
    static const String cartPage = "/cart-page";
    static const String splashPage = "/splash-page";
+  static const String singIn = "/sing-in";
 
   static String getInitial()=>'$initial';
   static String getDetailFood(int pageID, String page)=>'$popularFood?pageID=$pageID&page=$page';
   static String getRecommendedFood(int pageID,String page)=>'$recommendedFood?pageID=$pageID&page=$page';
   static String getCartPage() => '$cartPage';
   static String getSplashPage() => '$splashPage';
+  static String getSingInPage() => '$singIn';  
 
   static List<GetPage> routes =[
 
     GetPage(name: splashPage, page: ()=>SplashScreen()),
     GetPage(name: initial, page: ()=>HomePage()),
+    GetPage(name: singIn, page: ()=>SingInPage(),transition: Transition.fade),    
 
     GetPage(name: popularFood, page: (){
       var pageID = Get.parameters['pageID'];

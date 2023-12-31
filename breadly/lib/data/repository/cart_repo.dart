@@ -67,4 +67,8 @@ List<CartModel> getCartHistoryList(){
     cart=[];
     sharedPreferences.remove(AppConstants.CART_LIST);
   }
+  void clearCartHistory(){
+    removeCart();
+    sharedPreferences.remove(AppConstants.CART_HISTORY_LIST);
+  }
 }
