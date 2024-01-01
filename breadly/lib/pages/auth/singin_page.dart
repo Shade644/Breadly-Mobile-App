@@ -1,6 +1,7 @@
 import 'package:breadly/base/custom_loader.dart';
 import 'package:breadly/base/show_message.dart';
 import 'package:breadly/controllers/auth_controller.dart';
+import 'package:breadly/models/signin_model.dart';
 import 'package:breadly/pages/auth/singup_page.dart';
 import 'package:breadly/routes/route_helper.dart';
 import 'package:breadly/utils/dimensions.dart';
@@ -19,25 +20,26 @@ class SingInPage extends StatelessWidget {
     var emailController = TextEditingController();
     var passwordController = TextEditingController();
 
-        void _login(AuthController authController){
-      String email = emailController.text.trim();
+    void _login(AuthController authController){
+      String usernamee = emailController.text.trim();
       String password = passwordController.text.trim();
 
-      if(email.isEmpty){
+      if(usernamee.isEmpty){
         showMessage("Wpisz Adres Email",title: "Email");
       }
-      else if(!GetUtils.isEmail(email)){
+      else if(!GetUtils.isEmail(usernamee)){
       showMessage("Wpisz Poprawy Adres Email",title: "Niepoprawy adres Email");
       
       }else if(password.isEmpty){
         showMessage("Wpisz Hasło",title: "Hasło");
       }
       else{
-      showMessage("Brak błędów",title: "OK");
-
-        authController.login(email,password).then((status){
+         SignInBody signInBody = SignInBody(
+        username: usernamee,    
+        password: password,       
+        );
+        authController.login(signInBody).then((status){
           if(status.isSuccess){
-            Get.toNamed(RouteHelper.getInitial());
             print("success");
           }
           else{
@@ -46,10 +48,9 @@ class SingInPage extends StatelessWidget {
         });
       }
     }
-
     return Scaffold(
-      body:GetBuilder<AuthController>(builder:(authController){
-        return !authController.isLoading?SingleChildScrollView(
+      body:GetBuilder<AuthController>(builder:(_authController){
+        return !_authController.isLoading?SingleChildScrollView(
           physics: BouncingScrollPhysics(),
           child: Column(
             children: [
@@ -88,7 +89,7 @@ class SingInPage extends StatelessWidget {
                 ],)
               ),
             SizedBox(height: Dimensions.height20,),
-            AppTextFild(
+              AppTextFild(
               textController: emailController,
               hintText: "Podaj adres email",
               icon:Icons.email,
@@ -102,8 +103,8 @@ class SingInPage extends StatelessWidget {
             ),
             SizedBox(height: Dimensions.height20,),
             GestureDetector(
-              onTap: (){
-                _login(authController);
+              onTap:() {
+                _login(_authController);
               },
               child: Container(
                 width: Dimensions.screenWidth/2,

@@ -61,7 +61,7 @@ class SingUpPage extends StatelessWidget {
         surname: surname,         
         phone: phone, 
         email: email, 
-        password: password
+        password: password,       
         );
         authController.registration(signUpBody).then((status){
           if(status.isSuccess){

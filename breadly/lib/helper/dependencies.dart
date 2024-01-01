@@ -3,6 +3,7 @@ import 'package:breadly/controllers/cart_controller.dart';
 import 'package:breadly/controllers/popular_product_controller.dart';
 import 'package:breadly/controllers/recommended_product_controller.dart';
 import 'package:breadly/data/API/api_client.dart';
+import 'package:breadly/data/API/api_client_mvs.dart';
 import 'package:breadly/data/repository/auth_repo.dart';
 import 'package:breadly/data/repository/cart_repo.dart';
 import 'package:breadly/data/repository/popular_product_repo.dart';
@@ -17,6 +18,9 @@ Future<void> init() async {
 
   Get.lazyPut(()=>ApiClient(appBaseUrl: AppConstants.BASE_URL_LOCAL));
   Get.lazyPut(() => AuthRepo(apiClient: Get.find(), sharedPreferences: Get.find()));
+
+  Get.lazyPut(()=>ApiClientMvs(appBaseUrlmvs: AppConstants.BASE_URL));
+  
 
   Get.lazyPut(() => PopularProductRepo(apiClient: Get.find()));
   Get.lazyPut(() => RecommendedProductRepo(apiClient: Get.find()));

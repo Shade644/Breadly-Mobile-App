@@ -1,9 +1,10 @@
 import 'package:breadly/data/API/api_client.dart';
+import 'package:breadly/data/API/api_client_mvs.dart';
 import 'package:breadly/utils/app_constants.dart';
 import 'package:get/get.dart';
 
 class PopularProductRepo extends GetxService{
-  final ApiClient apiClient;
+  final ApiClientMvs apiClient;
   PopularProductRepo({required this.apiClient});
 
   Future<Response> getPopularProductList() async{
