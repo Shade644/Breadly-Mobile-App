@@ -90,13 +90,16 @@ class PersonPage extends StatelessWidget {
                 SizedBox(height: Dimensions.height10),
                 GestureDetector(
                   onTap: (){
+                   print("Zalogowano");
                     if(Get.find<AuthController>().userLoggedIn()){
                     Get.find<AuthController>().clearSharedData();
                     Get.find<CartController>().clear();
                     Get.find<CartController>().clearCartHistory();
                     Get.offNamed(RouteHelper.getInitial());
                     }
-
+                    else{
+                      print("Nie zalogowano");
+                    }
                   },
                   child: PersonWidget(
                       appIcon: AppIcon(

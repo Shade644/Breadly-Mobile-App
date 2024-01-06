@@ -221,6 +221,7 @@ class CartPage extends StatelessWidget {
                 GestureDetector(
                     onTap: () {
                      if(Get.find<AuthController>().userLoggedIn()){
+                      print("Zalogowany");
                       CartController.addToHistory();
                      }
                      else{

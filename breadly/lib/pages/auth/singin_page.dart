@@ -21,13 +21,13 @@ class SingInPage extends StatelessWidget {
     var passwordController = TextEditingController();
 
     void _login(AuthController authController){
-      String usernamee = emailController.text.trim();
+      String username = emailController.text.trim();
       String password = passwordController.text.trim();
 
-      if(usernamee.isEmpty){
+      if(username.isEmpty){
         showMessage("Wpisz Adres Email",title: "Email");
       }
-      else if(!GetUtils.isEmail(usernamee)){
+      else if(!GetUtils.isEmail(username)){
       showMessage("Wpisz Poprawy Adres Email",title: "Niepoprawy adres Email");
       
       }else if(password.isEmpty){
@@ -35,12 +35,13 @@ class SingInPage extends StatelessWidget {
       }
       else{
          SignInBody signInBody = SignInBody(
-        username: usernamee,    
+        username: username,    
         password: password,       
         );
         authController.login(signInBody).then((status){
           if(status.isSuccess){
             print("success");
+            Get.toNamed(RouteHelper.getInitial());
           }
           else{
             showMessage(status.message);

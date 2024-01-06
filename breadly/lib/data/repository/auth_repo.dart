@@ -16,7 +16,6 @@ class AuthRepo{
 
   Future<Response> registration(SignUpBody signUpBody) async{
     return await apiClient.postData(AppConstants.REGISTRATION_URL_LOCAL, signUpBody.toJson());
-
   }
 
   Future<String> getUserToken() async{
@@ -31,24 +30,11 @@ class AuthRepo{
     return sharedPreferences.containsKey(AppConstants.TOKEN);
   }
 
-//  Future<bool> saveUserToken(String acces_token) async{
-//     apiClient.token = acces_token;
-//     apiClient.updateHeader(acces_token);
-//     return await sharedPreferences.setString(AppConstants.TOKEN, acces_token);
-//   }
-
-Future<bool> saveUserToken(Map<String, dynamic> tokenResponse) async {
-  // Odczytaj wartość pola "acces_token" z odpowiedzi
-  String accessToken = tokenResponse["acces_token"];
-
-  // Ustaw token w apiClient i zaktualizuj nagłówek
-  apiClient.token = accessToken;
-  apiClient.updateHeader(accessToken);
-
-  // Zapisz token w sharedPreferences
-  return await sharedPreferences.setString(AppConstants.TOKEN, accessToken);
-}
-
+ Future<bool> saveUserToken(String token) async{
+    apiClient.token = token;
+    apiClient.updateHeader(token);
+    return await sharedPreferences.setString(AppConstants.TOKEN, token);
+  }
 
   Future<void> saveUserNumberandPassword(String number, String password) async{
     try{
