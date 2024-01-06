@@ -168,7 +168,7 @@ class CartHistory extends StatelessWidget {
                   ),
                 ),
               ),
-            ):NoDataPage(text: "Nie jeszcze nie kupiłeś");
+            ):NoDataPage(text: "Nic jeszcze nie kupiłeś");
                       })
       ],)
     );

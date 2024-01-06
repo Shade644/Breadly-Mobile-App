@@ -2,12 +2,14 @@ import 'package:breadly/controllers/auth_controller.dart';
 import 'package:breadly/controllers/cart_controller.dart';
 import 'package:breadly/controllers/popular_product_controller.dart';
 import 'package:breadly/controllers/recommended_product_controller.dart';
+import 'package:breadly/controllers/user_controller.dart';
 import 'package:breadly/data/API/api_client.dart';
 import 'package:breadly/data/API/api_client_mvs.dart';
 import 'package:breadly/data/repository/auth_repo.dart';
 import 'package:breadly/data/repository/cart_repo.dart';
 import 'package:breadly/data/repository/popular_product_repo.dart';
 import 'package:breadly/data/repository/recommended_product_repo.dart';
+import 'package:breadly/data/repository/user_repo.dart';
 import 'package:breadly/utils/app_constants.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -31,4 +33,8 @@ Future<void> init() async {
 
   Get.lazyPut(() => CartController(cartRepo: Get.find()));
   Get.lazyPut(() => AuthController(authRepo: Get.find()));
+
+   Get.lazyPut(() => UserRepo(apiClient: Get.find(),));
+   Get.lazyPut(() => UserController(userRepo: Get.find(),));
+ 
 }

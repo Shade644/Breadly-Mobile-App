@@ -2,6 +2,7 @@ import 'package:breadly/data/repository/auth_repo.dart';
 import 'package:breadly/models/response_model.dart';
 import 'package:breadly/models/signin_model.dart';
 import 'package:breadly/models/signup_model.dart';
+import 'package:breadly/utils/app_constants.dart';
 import 'package:get/get.dart';
 
 class AuthController extends GetxController implements GetxService{
@@ -47,7 +48,7 @@ class AuthController extends GetxController implements GetxService{
    }
    else{
     print("Błąd logowania. Kod błędu: ${response.statusCode}");
-    responseModel = ResponseModel(false, response.statusText!);
+    responseModel = ResponseModel(false,response.statusText!);
    }
    _isLoading = false;
    update();
@@ -64,5 +65,6 @@ class AuthController extends GetxController implements GetxService{
   bool clearSharedData(){
     return authRepo.clearSharedData();
   }
+  
 
 }

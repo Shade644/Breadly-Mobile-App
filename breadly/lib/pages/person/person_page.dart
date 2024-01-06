@@ -1,5 +1,7 @@
+import 'package:breadly/base/custom_loader.dart';
 import 'package:breadly/controllers/auth_controller.dart';
 import 'package:breadly/controllers/cart_controller.dart';
+import 'package:breadly/controllers/user_controller.dart';
 import 'package:breadly/routes/route_helper.dart';
 import 'package:breadly/utils/dimensions.dart';
 import 'package:breadly/widgets/Big_text.dart';
@@ -13,6 +15,12 @@ class PersonPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool _userLoggedIn = Get.find<AuthController>().userLoggedIn();
+    if(_userLoggedIn){
+      print("konto zalogowane");
+      Get.find<UserController>().getUserInfo();
+    }
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blueAccent,
@@ -24,111 +32,114 @@ class PersonPage extends StatelessWidget {
           ),
         ),
       ),
-      body: Container(
-        width: double.maxFinite,
-        margin: EdgeInsets.only(top: Dimensions.height20),
-        child: Column(
-          children: [
-            AppIcon(
-              icon: Icons.person,
-              backgroundColor: Colors.blueAccent,
-              iconColor: Colors.white,
-              iconSize: Dimensions.height15 * 5,
-              size: Dimensions.height15 * 10,
-            ),
-            SizedBox(height: Dimensions.height20),
-            Expanded(
-                child: SingleChildScrollView(
-              child: Column(children: [
-                PersonWidget(
-                    appIcon: AppIcon(
-                      icon: Icons.person,
-                      backgroundColor: Colors.blueAccent,
-                      iconColor: Colors.white,
-                      iconSize: Dimensions.height30,
-                      size: Dimensions.height50,
-                    ),
-                    bigText: BigText(
-                      text: "Adam",
-                    )),
-                SizedBox(height: Dimensions.height10),
-                PersonWidget(
-                    appIcon: AppIcon(
-                      icon: Icons.phone_android,
-                      backgroundColor: Colors.blueAccent,
-                      iconColor: Colors.white,
-                      iconSize: Dimensions.height30,
-                      size: Dimensions.height50,
-                    ),
-                    bigText: BigText(
-                      text: "123456789",
-                    )),
-                SizedBox(height: Dimensions.height10),
-                PersonWidget(
-                    appIcon: AppIcon(
-                      icon: Icons.email_sharp,
-                      backgroundColor: Colors.blueAccent,
-                      iconColor: Colors.white,
-                      iconSize: Dimensions.height30,
-                      size: Dimensions.height50,
-                    ),
-                    bigText: BigText(
-                      text: "Adamadamowy@gmail.com",
-                    )),
-                SizedBox(height: Dimensions.height10),
-                PersonWidget(
-                    appIcon: AppIcon(
-                      icon: Icons.location_on,
-                      backgroundColor: Colors.blueAccent,
-                      iconColor: Colors.white,
-                      iconSize: Dimensions.height30,
-                      size: Dimensions.height50,
-                    ),
-                    bigText: BigText(
-                      text: "Adres",
-                    )),
-                SizedBox(height: Dimensions.height10),
-                GestureDetector(
-                  onTap: (){
-                   print("Zalogowano");
-                    if(Get.find<AuthController>().userLoggedIn()){
-                    Get.find<AuthController>().clearSharedData();
-                    Get.find<CartController>().clear();
-                    Get.find<CartController>().clearCartHistory();
-                    Get.offNamed(RouteHelper.getInitial());
-                    }
-                    else{
-                      print("Nie zalogowano");
-                    }
-                  },
-                  child: PersonWidget(
-                      appIcon: AppIcon(
-                        icon: Icons.logout_outlined,
-                        backgroundColor: Colors.redAccent,
-                        iconColor: Colors.white,
-                        iconSize: Dimensions.height30,
-                        size: Dimensions.height50,
-                      ),
-                      bigText: BigText(
-                        text: "Logout",
-                      )),
+      body: GetBuilder<UserController>(builder:(userController){
+        return _userLoggedIn?(userController.isLoading?Container(
+            width: double.maxFinite,
+            margin: EdgeInsets.only(top: Dimensions.height20),
+            child: Column(
+              children: [
+                AppIcon(
+                  icon: Icons.person,
+                  backgroundColor: Colors.blueAccent,
+                  iconColor: Colors.white,
+                  iconSize: Dimensions.height15 * 5,
+                  size: Dimensions.height15 * 10,
                 ),
-                SizedBox(height: Dimensions.height10),
-                PersonWidget(
-                    appIcon: AppIcon(
-                      icon: Icons.logout_outlined,
-                      backgroundColor: Colors.redAccent,
-                      iconColor: Colors.white,
-                      iconSize: Dimensions.height30,
-                      size: Dimensions.height50,
+                SizedBox(height: Dimensions.height20),
+                Expanded(
+                    child: SingleChildScrollView(
+                  child: Column(children: [
+                    PersonWidget(
+                        appIcon: AppIcon(
+                          icon: Icons.person,
+                          backgroundColor: Colors.blueAccent,
+                          iconColor: Colors.white,
+                          iconSize: Dimensions.height30,
+                          size: Dimensions.height50,
+                        ),
+                        bigText: BigText(
+                          text: userController.userModel.name +" "+ userController.userModel.surname,
+                        )),
+                    SizedBox(height: Dimensions.height10),
+                    PersonWidget(
+                        appIcon: AppIcon(
+                          icon: Icons.phone_android,
+                          backgroundColor: Colors.blueAccent,
+                          iconColor: Colors.white,
+                          iconSize: Dimensions.height30,
+                          size: Dimensions.height50,
+                        ),
+                        bigText: BigText(
+                          text: userController.userModel.phone.toString(),
+                        )),
+                    SizedBox(height: Dimensions.height10),
+                    PersonWidget(
+                        appIcon: AppIcon(
+                          icon: Icons.email_sharp,
+                          backgroundColor: Colors.blueAccent,
+                          iconColor: Colors.white,
+                          iconSize: Dimensions.height30,
+                          size: Dimensions.height50,
+                        ),
+                        bigText: BigText(
+                          text: userController.userModel.email,
+                        )),
+                    SizedBox(height: Dimensions.height10),
+                    PersonWidget(
+                        appIcon: AppIcon(
+                          icon: Icons.location_on,
+                          backgroundColor: Colors.blueAccent,
+                          iconColor: Colors.white,
+                          iconSize: Dimensions.height30,
+                          size: Dimensions.height50,
+                        ),
+                        bigText: BigText(
+                          text: "Adres",
+                        )),
+                    SizedBox(height: Dimensions.height10),
+                    GestureDetector(
+                      onTap: (){
+                       print("Zalogowano");
+                        if(Get.find<AuthController>().userLoggedIn()){
+                        Get.find<AuthController>().clearSharedData();
+                        Get.find<CartController>().clear();
+                        Get.find<CartController>().clearCartHistory();
+                        Get.offNamed(RouteHelper.getInitial());
+                        }
+                        else{
+                          print("Nie zalogowano");
+                        }
+                      },
+                      child: PersonWidget(
+                          appIcon: AppIcon(
+                            icon: Icons.logout_outlined,
+                            backgroundColor: Colors.redAccent,
+                            iconColor: Colors.white,
+                            iconSize: Dimensions.height30,
+                            size: Dimensions.height50,
+                          ),
+                          bigText: BigText(
+                            text: "Logout",
+                          )),
                     ),
-                    bigText: BigText(
-                      text: "?",
-                    )),
-              ]),
-            ))
-          ],
-        ),
+                    SizedBox(height: Dimensions.height10),
+                    PersonWidget(
+                        appIcon: AppIcon(
+                          icon: Icons.logout_outlined,
+                          backgroundColor: Colors.redAccent,
+                          iconColor: Colors.white,
+                          iconSize: Dimensions.height30,
+                          size: Dimensions.height50,
+                        ),
+                        bigText: BigText(
+                          text: "?",
+                        )),
+                  ]),
+                ))
+              ],
+            ),  
+        ):CustomLoader()):Container(child: Center(child: Text("Musisz się zalogować")),);
+        }
       ),
     );
   }
