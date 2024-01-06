@@ -1,4 +1,3 @@
-import 'package:breadly/controllers/auth_controller.dart';
 import 'package:breadly/data/repository/user_repo.dart';
 import 'package:breadly/models/response_model.dart';
 import 'package:breadly/models/user_model.dart';

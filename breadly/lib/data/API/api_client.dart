@@ -8,11 +8,15 @@ class ApiClient extends GetConnect implements GetxService{
   final String appBaseUrl;
   late Map<String, String> _mainHeaders;
   late Map<String, String> _mainHeadersReg;  
+  
+
 
   ApiClient({required this.appBaseUrl}){
     baseUrl = appBaseUrl;
     token = AppConstants.TOKEN;
     timeout = Duration(seconds: 30);
+
+    
     _mainHeaders ={
       'Content-type':'application/x-www-form-urlencoded; charset=UTF-8',
       'Authorization': 'Bearer $token',
@@ -80,5 +84,7 @@ Future<Response> postDataLogin(String uri, SignInBody body) async {
     return Response(statusCode: 1, statusText: e.toString());
   }
 }
+
+
 
 }
