@@ -8,8 +8,8 @@ class UserRepo{
 
   Future<Response> getUserInfo() async{
     return await apiClient.getData(AppConstants.USER_URL);
-
   }
- 
-  
+  void removeUser(){
+   getUserInfo();
+  }
 }

@@ -11,7 +11,7 @@ class ApiClient extends GetConnect implements GetxService{
   
 
 
-  ApiClient({required this.appBaseUrl}){
+  ApiClient({required this.appBaseUrl,}){
     baseUrl = appBaseUrl;
     token = AppConstants.TOKEN;
     timeout = Duration(seconds: 30);
@@ -42,7 +42,7 @@ class ApiClient extends GetConnect implements GetxService{
     try {
       Response response = await get(
         uri, 
-        headers: headers??_mainHeaders
+        headers: headers??_mainHeadersReg
         );
       return response;
     }

@@ -2,6 +2,7 @@ import 'package:breadly/base/custom_loader.dart';
 import 'package:breadly/controllers/auth_controller.dart';
 import 'package:breadly/controllers/cart_controller.dart';
 import 'package:breadly/controllers/user_controller.dart';
+import 'package:breadly/pages/person/no_logged_in.dart';
 import 'package:breadly/routes/route_helper.dart';
 import 'package:breadly/utils/dimensions.dart';
 import 'package:breadly/widgets/Big_text.dart';
@@ -104,7 +105,8 @@ class PersonPage extends StatelessWidget {
                         Get.find<AuthController>().clearSharedData();
                         Get.find<CartController>().clear();
                         Get.find<CartController>().clearCartHistory();
-                        Get.offNamed(RouteHelper.getInitial());
+                        // Get.find<UserController>().RemoveID();
+                        Get.offNamed(RouteHelper.getSingInPage());
                         }
                         else{
                           print("Nie zalogowano");
@@ -138,7 +140,7 @@ class PersonPage extends StatelessWidget {
                 ))
               ],
             ),  
-        ):CustomLoader()):Container(child: Center(child: Text("Musisz się zalogować")),);
+        ):CustomLoader()):NoLoggedIn();
         }
       ),
     );

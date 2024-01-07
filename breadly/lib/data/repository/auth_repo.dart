@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:breadly/controllers/user_controller.dart';
 import 'package:breadly/data/API/api_client.dart';
 import 'package:breadly/models/signin_model.dart';
 import 'package:breadly/models/signup_model.dart';
@@ -45,10 +48,23 @@ class AuthRepo{
     }
   }
 
+Map<String, dynamic> decodeToken(String token) {
+  List<String> parts = token.split('.');
+  String normalized = base64Url.normalize(parts[1]);
+  int paddingLength = (normalized.length % 4 == 0) ? 0 : (4 - normalized.length % 4);
+  String padding = '=' * paddingLength;
+
+  String decodedData = utf8.decode(base64Url.decode(normalized + padding));
+  return json.decode(decodedData);
+}
+
+
+  
   bool clearSharedData(){
     sharedPreferences.remove(AppConstants.TOKEN);
     sharedPreferences.remove(AppConstants.PASSWORD);
     sharedPreferences.remove(AppConstants.PHONE);
+    sharedPreferences.remove(AppConstants.USER_ID);
     apiClient.token = '';
     apiClient.updateHeader('');
     return true;

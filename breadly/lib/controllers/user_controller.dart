@@ -18,6 +18,7 @@ class UserController extends GetxController implements GetxService{
   Future<ResponseModel> getUserInfo() async{
    Response response = await userRepo.getUserInfo();
    late ResponseModel responseModel;
+   update();
    print("Response body: ${response.body}");
    if(response.statusCode == 200){
     _userModel = UserModel.fromJson(response.body);
@@ -30,4 +31,5 @@ class UserController extends GetxController implements GetxService{
    update();
    return responseModel;
   }
+  
 }

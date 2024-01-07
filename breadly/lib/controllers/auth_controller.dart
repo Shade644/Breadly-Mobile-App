@@ -39,16 +39,16 @@ class AuthController extends GetxController implements GetxService {
     _isLoading = true;
     update();
     Response response = await authRepo.login(signInBody);
+    print("Login Token "+response.body["acces_token"].toString());
     late ResponseModel responseModel;
     if (response.statusCode == 200) {
       print("backend");
       authRepo.saveUserToken(response.body["acces_token"]);
-      print(response.body["acces_token"].toString());
-      final decodedToken = decodeToken(response.body["acces_token"]);
+      final decodedToken = authRepo.decodeToken(response.body["acces_token"]);
       userId = decodedToken["user_id"].toString();
       AppConstants.USER_ID = userId;
+      print("Token w AppConstants "+AppConstants.USER_ID.toString());
       print("Decoded Token: $userId");
-
       responseModel = ResponseModel(true, response.body["acces_token"]);
     } else {
       print("Błąd logowania. Kod błędu: ${response.statusCode}");
@@ -59,11 +59,6 @@ class AuthController extends GetxController implements GetxService {
     return responseModel;
   }
 
-  Map<String, dynamic> decodeToken(String token) {
-    List<String> parts = token.split('.');
-    String decodedData = utf8.decode(base64Url.decode(parts[1]));
-    return json.decode(decodedData);
-  }
 
   void saveUserNumberandPassword(String number, String password) {
     authRepo.saveUserNumberandPassword(number, password);
@@ -75,7 +70,7 @@ class AuthController extends GetxController implements GetxService {
 
   bool clearSharedData() {
     return authRepo.clearSharedData();
-  }
+  }  
 }
 
 
