@@ -3,7 +3,6 @@ import 'package:breadly/controllers/auth_controller.dart';
 import 'package:breadly/controllers/cart_controller.dart';
 import 'package:breadly/controllers/popular_product_controller.dart';
 import 'package:breadly/controllers/recommended_product_controller.dart';
-import 'package:breadly/pages/home/main_page.dart';
 import 'package:breadly/routes/route_helper.dart';
 import 'package:breadly/utils/app_constants.dart';
 import 'package:breadly/utils/dimensions.dart';
@@ -56,8 +55,8 @@ class CartPage extends StatelessWidget {
                   ),
                 ],
               )),
-          GetBuilder<CartController>(builder: (_cartController){
-            return _cartController.getItems.length>0?
+          GetBuilder<CartController>(builder: (cartController){
+            return cartController.getItems.isNotEmpty?
                 Positioned(
                 top: Dimensions.height20 * 5,
                 left: Dimensions.width20,
@@ -69,24 +68,24 @@ class CartPage extends StatelessWidget {
                     context: context,
                     removeTop: true,
                     child: GetBuilder<CartController>(builder: (cartController){
-                    var _cartList = cartController.getItems;
+                    var cartList = cartController.getItems;
                     return ListView.builder(
-                        itemCount: _cartList.length,
+                        itemCount: cartList.length,
                         itemBuilder: (_, index) {
-                          return Container(
+                          return SizedBox(
                             height: Dimensions.height20 * 5,
                             width: double.maxFinite,
                             child: Row(children: [
                               GestureDetector(
                                 onTap: (){
                                   var popularIndex = Get.find<PopularProductController>()
-                                  .popularProductList.indexOf(_cartList[index].product!);
+                                  .popularProductList.indexOf(cartList[index].product!);
                                   if(popularIndex >= 0){
                                     Get.toNamed(RouteHelper.getDetailFood(popularIndex,"cartpage"));
                                   }
                                   else{
                                   var recommeendedIndex = Get.find<RecommendedProductController>()
-                                  .recommendedProductList.indexOf(_cartList[index].product!);
+                                  .recommendedProductList.indexOf(cartList[index].product!);
                                   if(recommeendedIndex<0){
                                     Get.snackbar("Historia Zamówień", "Produkt nie jest już dostępny");
                                   }
@@ -119,7 +118,7 @@ class CartPage extends StatelessWidget {
                                 width: Dimensions.width10,
                               ),
                               Expanded(
-                                  child: Container(
+                                  child: SizedBox(
                                 height: Dimensions.height20 * 5,
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -154,25 +153,25 @@ class CartPage extends StatelessWidget {
                                               children: [
                                                 GestureDetector(
                                                     onTap: () {
-                                                     cartController.addItem(_cartList[index].product!, -1);
+                                                     cartController.addItem(cartList[index].product!, -1);
                                                     },
-                                                    child: Icon(Icons.remove,
+                                                    child: const Icon(Icons.remove,
                                                         color: Colors.black)),
                                                 SizedBox(
                                                     width:
                                                         Dimensions.width10 / 2),
                                                 BigText(
                                                     text:
-                                                        _cartList[index].quantity.toString()
+                                                        cartList[index].quantity.toString()
                                                         ), //popularProduct.inCartItems.toString()),
                                                 SizedBox(
                                                     width:
                                                         Dimensions.width10 / 2),
                                                 GestureDetector(
                                                     onTap: () {
-                                               cartController.addItem(_cartList[index].product!, 1);
+                                               cartController.addItem(cartList[index].product!, 1);
                                                     },
-                                                    child: Icon(Icons.add,
+                                                    child: const Icon(Icons.add,
                                                         color: Colors.black)),
                                               ],
                                             )),
@@ -185,7 +184,7 @@ class CartPage extends StatelessWidget {
                           );
                         });}
                   ),
-                ))):NoDataPage(text: "Twój koszyk jest pusty!");
+                ))):const NoDataPage(text: "Twój koszyk jest pusty!");
                 }  
           )
         ]
@@ -195,13 +194,13 @@ class CartPage extends StatelessWidget {
             height: Dimensions.bottomHeightBar,
             padding: EdgeInsets.only(top:Dimensions.height30,bottom: Dimensions.height30,left: Dimensions.width20,right: Dimensions.width20),
            decoration: BoxDecoration(
-            color: Color.fromARGB(134, 196, 196, 196),
+            color: const Color.fromARGB(134, 196, 196, 196),
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(Dimensions.radius20*2),
               topRight: Radius.circular(Dimensions.radius20*2),
             )
            ),
-           child: CartController.getItems.length>0?
+           child: CartController.getItems.isNotEmpty?
              Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -214,7 +213,7 @@ class CartPage extends StatelessWidget {
                   child: Row(
                     children: [
                       SizedBox(width: Dimensions.width10),
-                      BigText(text: CartController.totalAmount.toString() +" zł"),
+                      BigText(text: "${CartController.totalAmount} zł"),
                       SizedBox(width: Dimensions.width10),
                   ],)
                 ),
@@ -230,14 +229,14 @@ class CartPage extends StatelessWidget {
                     },
                   child: Container(
                     padding: EdgeInsets.only(top:Dimensions.height20,bottom: Dimensions.height20,left: Dimensions.width20,right: Dimensions.width20),
-                      child: BigText(
-                        text: " Zapłać",
-                        color: Colors.white
-                        ),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(Dimensions.radius20),
                       color: Colors.blueAccent,
                     ),
+                      child: BigText(
+                        text: " Zapłać",
+                        color: Colors.white
+                        ),
                   ),
                 )
              ]):Container(),

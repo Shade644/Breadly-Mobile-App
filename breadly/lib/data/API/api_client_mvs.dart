@@ -9,7 +9,7 @@ class ApiClientMvs extends GetConnect implements GetxService{
   ApiClientMvs({required this.appBaseUrlmvs}){
     baseUrl = appBaseUrlmvs;
     token = AppConstants.TOKEN;
-    timeout = Duration(seconds: 30);
+    timeout = const Duration(seconds: 30);
     _mainHeaders ={
       'Content-type':'application/json; charset=UTF-8',
       'Authorization': 'Bearer $token',

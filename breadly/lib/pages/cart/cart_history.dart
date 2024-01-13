@@ -22,7 +22,7 @@ class CartHistory extends StatelessWidget {
     var getCartHistoryList = Get.find<CartController>()
       .getCartHistoryList().reversed.toList();
 
-      Map<String, int> cartItemsPerOrder = Map();
+      Map<String, int> cartItemsPerOrder = {};
   
   for(int i=0;i<getCartHistoryList.length; i++){
  if(cartItemsPerOrder.containsKey(getCartHistoryList[i].time)){
@@ -66,13 +66,13 @@ class CartHistory extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 BigText(text: "Historia Zamówień",color: Colors.white,),
-                AppIcon(icon: Icons.shopping_cart_outlined,
+                const AppIcon(icon: Icons.shopping_cart_outlined,
                  iconColor: Colors.blueAccent,
                  ),
             ],)
           ),
-          GetBuilder<CartController>(builder: (_cartController){
-            return _cartController.getCartHistoryList().length>0?
+          GetBuilder<CartController>(builder: (cartController){
+            return cartController.getCartHistoryList().isNotEmpty?
               Expanded(
               child: Container(
                 margin: EdgeInsets.only(
@@ -123,14 +123,14 @@ class CartHistory extends StatelessWidget {
                                     ):Container();
                                 })
                               ),
-                              Container(
+                              SizedBox(
                                 height: Dimensions.height20*4,
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                   crossAxisAlignment: CrossAxisAlignment.end,
                                   children: [
                                     SmallText(text: "Zakupiono"),
-                                    BigText(text: itemsPerOrder[i].toString()+" Items"),
+                                    BigText(text: "${itemsPerOrder[i]} Items"),
                                     GestureDetector(
                                       onTap: (){
                                         var orderTime = cartOrderTimeToList();
@@ -168,7 +168,7 @@ class CartHistory extends StatelessWidget {
                   ),
                 ),
               ),
-            ):NoDataPage(text: "Nic jeszcze nie kupiłeś");
+            ):const NoDataPage(text: "Nic jeszcze nie kupiłeś");
                       })
       ],)
     );

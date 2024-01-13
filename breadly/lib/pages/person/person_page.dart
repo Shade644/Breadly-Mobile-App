@@ -16,8 +16,8 @@ class PersonPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool _userLoggedIn = Get.find<AuthController>().userLoggedIn();
-    if(_userLoggedIn){
+    bool userLoggedIn = Get.find<AuthController>().userLoggedIn();
+    if(userLoggedIn){
       print("konto zalogowane");
       Get.find<UserController>().getUserInfo();
     }
@@ -34,7 +34,7 @@ class PersonPage extends StatelessWidget {
         ),
       ),
       body: GetBuilder<UserController>(builder:(userController){
-        return _userLoggedIn?(userController.isLoading?Container(
+        return userLoggedIn?(userController.isLoading?Container(
             width: double.maxFinite,
             margin: EdgeInsets.only(top: Dimensions.height20),
             child: Column(
@@ -59,7 +59,7 @@ class PersonPage extends StatelessWidget {
                           size: Dimensions.height50,
                         ),
                         bigText: BigText(
-                          text: userController.userModel.name +" "+ userController.userModel.surname,
+                          text: "${userController.userModel.name} ${userController.userModel.surname}",
                         )),
                     SizedBox(height: Dimensions.height10),
                     PersonWidget(
@@ -140,7 +140,7 @@ class PersonPage extends StatelessWidget {
                 ))
               ],
             ),  
-        ):CustomLoader()):NoLoggedIn();
+        ):const CustomLoader()):const NoLoggedIn();
         }
       ),
     );

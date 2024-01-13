@@ -7,7 +7,7 @@ import 'icon_and_text.dart';
 class AppColumn extends StatelessWidget {
   final String text;
 
-  const AppColumn({Key? key, required this.text}) : super(key:key);
+  const AppColumn({super.key, required this.text});
 
   @override
   Widget build(BuildContext context) {
@@ -28,9 +28,9 @@ class AppColumn extends StatelessWidget {
               SmallText(text: "Ocen"),
             ],),
              SizedBox(height: Dimensions.height20,),
-            Row(
+            const Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
+              children: [
               IconText(
                 icon: Icons.circle_sharp, 
                 text: "Normal", 

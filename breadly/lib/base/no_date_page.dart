@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 class NoDataPage extends StatelessWidget {
   final String text;
   final String imagePath;
-  const NoDataPage({Key? key, 
+  const NoDataPage({super.key, 
   required this.text,
   this.imagePath ="assets/images/empty.png"
-  }): super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

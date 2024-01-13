@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:breadly/controllers/user_controller.dart';
 import 'package:breadly/data/API/api_client.dart';
 import 'package:breadly/models/signin_model.dart';
 import 'package:breadly/models/signup_model.dart';
@@ -22,7 +21,7 @@ class AuthRepo{
   }
 
   Future<String> getUserToken() async{
-    return await sharedPreferences.getString(AppConstants.TOKEN)??"None";
+    return sharedPreferences.getString(AppConstants.TOKEN)??"None";
   }
 
   Future<Response> login(SignInBody signInBody) async{
@@ -44,7 +43,7 @@ class AuthRepo{
      await sharedPreferences.setString(AppConstants.PHONE, number);
      await sharedPreferences.setString(AppConstants.PASSWORD, password);
     }catch(e){
-      throw e;
+      rethrow;
     }
   }
 

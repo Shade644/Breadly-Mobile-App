@@ -30,7 +30,7 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
     _loadResources();
     controller = AnimationController(
       vsync: this, 
-      duration: Duration(seconds: 2)
+      duration: const Duration(seconds: 2)
       )..forward();
 
     animation = CurvedAnimation(
@@ -38,7 +38,7 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
       curve: Curves.easeIn
       );
       Timer(
-        Duration(seconds: 3),
+        const Duration(seconds: 3),
         () => Get.offNamed(RouteHelper.getInitial())
       );
   }
@@ -46,7 +46,7 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 251, 209, 87),
+      backgroundColor: const Color.fromARGB(255, 251, 209, 87),
       body:ScaleTransition(
         scale: animation,
         child: Column(

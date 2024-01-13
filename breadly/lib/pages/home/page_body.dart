@@ -1,7 +1,6 @@
 import 'package:breadly/controllers/popular_product_controller.dart';
 import 'package:breadly/controllers/recommended_product_controller.dart';
 import 'package:breadly/models/product_model.dart';
-import 'package:breadly/pages/food/detail.dart';
 import 'package:breadly/routes/route_helper.dart';
 import 'package:breadly/utils/app_constants.dart';
 import 'package:breadly/utils/dimensions.dart';
@@ -26,8 +25,8 @@ class _PageBodyState extends State<PageBody> {
     viewportFraction: 0.85
   );
    var _currPageValue=0.0;
-   double _scaleFactor=0.8;
-  double _height=Dimensions.pageViewContainer;
+   final double _scaleFactor=0.8;
+  final double _height=Dimensions.pageViewContainer;
   
    @override
   void initState(){
@@ -51,7 +50,7 @@ class _PageBodyState extends State<PageBody> {
       children: [
        GetBuilder<PopularProductController>(builder: (popularProducts){
           return popularProducts.isLoaded?
-          Container(
+          SizedBox(
             // color: Colors.redAccent,
             height: Dimensions.pageView,
               child: PageView.builder(
@@ -63,7 +62,7 @@ class _PageBodyState extends State<PageBody> {
                     popularProducts.popularProductList[position],
               );},
                 ),
-          ): CircularProgressIndicator(
+          ): const CircularProgressIndicator(
             color: Colors.blueAccent
           );
         }),
@@ -137,9 +136,9 @@ GetBuilder<RecommendedProductController>(builder: (recommendedProduct){
                       SizedBox(height: Dimensions.height10,),
                       SmallText(text: "Opis Cały Ten"),
                       SizedBox(height: Dimensions.height10,),
-                       Row(
+                       const Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: const [
+                  children: [
                   IconText(
                     icon: Icons.circle_sharp, 
                     text: "Normal", 
@@ -167,7 +166,7 @@ GetBuilder<RecommendedProductController>(builder: (recommendedProduct){
         ),
       );
     }
-  ): CircularProgressIndicator(
+  ): const CircularProgressIndicator(
     color: Colors.blueAccent,
   );
   })

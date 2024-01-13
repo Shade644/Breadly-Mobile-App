@@ -1,9 +1,5 @@
-import 'package:breadly/controllers/auth_controller.dart';
 import 'package:breadly/utils/dimensions.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
-import 'package:get/get.dart';
 
 class CustomLoader extends StatelessWidget {
   const CustomLoader({super.key});
@@ -19,7 +15,7 @@ class CustomLoader extends StatelessWidget {
           color: Colors.blueAccent,
         ),
         alignment: Alignment.center,
-        child: CircularProgressIndicator(
+        child: const CircularProgressIndicator(
           color: Colors.white,
         ),
       ),

@@ -20,7 +20,7 @@ class SingInPage extends StatelessWidget {
     var emailController = TextEditingController();
     var passwordController = TextEditingController();
 
-    void _login(AuthController authController){
+    void login(AuthController authController){
       String username = emailController.text.trim();
       String password = passwordController.text.trim();
 
@@ -50,18 +50,18 @@ class SingInPage extends StatelessWidget {
       }
     }
     return Scaffold(
-      body:GetBuilder<AuthController>(builder:(_authController){
-        return !_authController.isLoading?SingleChildScrollView(
-          physics: BouncingScrollPhysics(),
+      body:GetBuilder<AuthController>(builder:(authController){
+        return !authController.isLoading?SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
           child: Column(
             children: [
               SizedBox(height: Dimensions.screenHeight*0.06,),
-              Container(
+              SizedBox(
                 height: Dimensions.screenHeight*0.25,
                 child: Center(
                   child: CircleAvatar(
                     radius: Dimensions.radius20*4,
-                    backgroundImage: AssetImage(
+                    backgroundImage: const AssetImage(
                       "assets/images/logo.png"
                     ),
                   ),
@@ -105,7 +105,7 @@ class SingInPage extends StatelessWidget {
             SizedBox(height: Dimensions.height20,),
             GestureDetector(
               onTap:() {
-                _login(_authController);
+                login(authController);
               },
               child: Container(
                 width: Dimensions.screenWidth/2,
@@ -135,7 +135,7 @@ class SingInPage extends StatelessWidget {
                   TextSpan(
                     recognizer: TapGestureRecognizer(
       
-                    )..onTap=()=>Get.to(()=>SingUpPage(), transition: Transition.fade),
+                    )..onTap=()=>Get.to(()=>const SingUpPage(), transition: Transition.fade),
                 text: "Stwórz je",
                 style: TextStyle(
                   color:Colors.black38,
@@ -149,7 +149,7 @@ class SingInPage extends StatelessWidget {
         
         
             ],),
-        ):CustomLoader();
+        ):const CustomLoader();
       }
       )
     );

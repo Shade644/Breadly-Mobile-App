@@ -8,7 +8,7 @@ class PersonWidget extends StatelessWidget {
  AppIcon appIcon;
  BigText bigText;
 
- PersonWidget({Key? key, required this.appIcon, required this.bigText}) : super(key: key);
+ PersonWidget({super.key, required this.appIcon, required this.bigText});
 
 
   @override
@@ -19,22 +19,22 @@ class PersonWidget extends StatelessWidget {
         top: Dimensions.height10,
         bottom: Dimensions.height10,
         ),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          boxShadow: [
+            BoxShadow(
+              blurRadius: 2,
+              offset: const Offset(0, 2),
+              color: Colors.grey.withOpacity(0.2)
+            )
+          ]
+        ),
         child: Row(
           children: [
             appIcon,
             SizedBox(width: Dimensions.width20),
             bigText,
         ],),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          boxShadow: [
-            BoxShadow(
-              blurRadius: 2,
-              offset: Offset(0, 2),
-              color: Colors.grey.withOpacity(0.2)
-            )
-          ]
-        ),
     );
   }
 }

@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 class ExpandableTextWidget extends StatefulWidget {
   final String text;
 
-  const ExpandableTextWidget({Key? key, required this.text}) : super(key: key);
+  const ExpandableTextWidget({super.key, required this.text});
 
   @override
   State<ExpandableTextWidget> createState() => _ExpandableTextWidgetState();
@@ -38,7 +38,7 @@ class _ExpandableTextWidgetState extends State<ExpandableTextWidget> {
     return Container(
       child: secondHalf.isEmpty?SmallText(size: Dimensions.font16,color:Colors.black38, text: firstHalf) : Column(
         children: [
-          SmallText(size: Dimensions.font16,color:Colors.black38, text: hiddenText?(firstHalf+"..."):(firstHalf+secondHalf)),
+          SmallText(size: Dimensions.font16,color:Colors.black38, text: hiddenText?("$firstHalf..."):(firstHalf+secondHalf)),
         InkWell(
           onTap: () {
             setState(() {

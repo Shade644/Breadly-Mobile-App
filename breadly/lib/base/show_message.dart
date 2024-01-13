@@ -7,7 +7,7 @@ Get.snackbar(
   title, message,
   titleText: BigText(text: title, color:Colors.black),
   messageText: Text(message, 
-  style: TextStyle(
+  style: const TextStyle(
     color:Colors.black,
   ),
   ),

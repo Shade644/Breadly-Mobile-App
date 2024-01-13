@@ -26,7 +26,7 @@ class SingUpPage extends StatelessWidget {
       "twitter.jpeg",
     ];
 
-    void _registration(AuthController authController){
+    void registration(AuthController authController){
       String name = nameController.text.trim();
       String surname = surnameController.text.trim();      
       String phone = phoneController.text.trim();
@@ -75,18 +75,18 @@ class SingUpPage extends StatelessWidget {
     }
 
     return Scaffold(
-      body:GetBuilder<AuthController>(builder: (_authController){
-        return !_authController.isLoading?SingleChildScrollView(
-          physics: BouncingScrollPhysics(),
+      body:GetBuilder<AuthController>(builder: (authController){
+        return !authController.isLoading?SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
           child: Column(
             children: [
               SizedBox(height: Dimensions.screenHeight*0.06,),
-              Container(
+              SizedBox(
                 height: Dimensions.screenHeight*0.25,
                 child: Center(
                   child: CircleAvatar(
                     radius: Dimensions.radius20*4,
-                    backgroundImage: AssetImage(
+                    backgroundImage: const AssetImage(
                       "assets/images/logo.png"
                     ),
                   ),
@@ -125,7 +125,7 @@ class SingUpPage extends StatelessWidget {
             SizedBox(height: Dimensions.height20,),
             GestureDetector(
               onTap:() {
-                _registration(_authController);
+                registration(authController);
               },
               child: Container(
                 width: Dimensions.screenWidth/2,
@@ -172,7 +172,7 @@ class SingUpPage extends StatelessWidget {
                   child: CircleAvatar(
                     radius: Dimensions.radius30,
                     backgroundImage: AssetImage(
-                      "assets/images/"+singUpIMG[index]
+                      "assets/images/${singUpIMG[index]}"
                     ),
                   ),
                 )),
@@ -180,7 +180,7 @@ class SingUpPage extends StatelessWidget {
         
         
             ],),
-        ):CustomLoader();
+        ):const CustomLoader();
         }
       ),
     );

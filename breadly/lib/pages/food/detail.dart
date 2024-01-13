@@ -1,7 +1,5 @@
 import 'package:breadly/controllers/cart_controller.dart';
 import 'package:breadly/controllers/popular_product_controller.dart';
-import 'package:breadly/pages/cart/cart_page.dart';
-import 'package:breadly/pages/home/main_page.dart';
 import 'package:breadly/routes/route_helper.dart';
 import 'package:breadly/utils/app_constants.dart';
 import 'package:breadly/utils/dimensions.dart';
@@ -11,13 +9,11 @@ import 'package:breadly/widgets/expandable_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../widgets/Big_text.dart';
-import '../../widgets/Small_text.dart';
-import '../../widgets/icon_and_text.dart';
 
 class DetailFood extends StatelessWidget {
   final int pageID;
   final String page;
-  DetailFood({super.key, required this.pageID, required this.page});
+  const DetailFood({super.key, required this.pageID, required this.page});
 
 
   @override
@@ -61,7 +57,7 @@ class DetailFood extends StatelessWidget {
                     Get.toNamed(RouteHelper.getInitial());                    
                   }
                 },
-                child: AppIcon(icon: Icons.arrow_back_ios)),
+                child: const AppIcon(icon: Icons.arrow_back_ios)),
               
              GetBuilder<PopularProductController>(builder: (controller){
               return GestureDetector(
@@ -72,9 +68,9 @@ class DetailFood extends StatelessWidget {
                 },
                 child: Stack(
                   children: [
-                     AppIcon(icon: Icons.shopping_cart_outlined),
+                     const AppIcon(icon: Icons.shopping_cart_outlined),
                     controller.totalItems >=1?
-                     Positioned(
+                     const Positioned(
                       right: 0,
                       top:0,
                          child: AppIcon(icon: Icons.circle, 
@@ -142,7 +138,7 @@ class DetailFood extends StatelessWidget {
             height: Dimensions.bottomHeightBar,
             padding: EdgeInsets.only(top:Dimensions.height30,bottom: Dimensions.height30,left: Dimensions.width20,right: Dimensions.width20),
            decoration: BoxDecoration(
-            color: Color.fromARGB(134, 196, 196, 196),
+            color: const Color.fromARGB(134, 196, 196, 196),
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(Dimensions.radius20*2),
               topRight: Radius.circular(Dimensions.radius20*2),
@@ -163,7 +159,7 @@ class DetailFood extends StatelessWidget {
                       onTap: () {
                         popularProduct.setQuantity(false);
                       },
-                      child: Icon(
+                      child: const Icon(
                       Icons.remove, color: Colors.black
                       )),
                     SizedBox(width: Dimensions.width10/2),
@@ -173,7 +169,7 @@ class DetailFood extends StatelessWidget {
                       onTap: () {
                         popularProduct.setQuantity(true);
                       },
-                      child: Icon(
+                      child: const Icon(
                       Icons.add, color: Colors.black
                       )),
                 ],)
@@ -184,14 +180,14 @@ class DetailFood extends StatelessWidget {
                   },
                 child: Container(
                   padding: EdgeInsets.only(top:Dimensions.height20,bottom: Dimensions.height20,left: Dimensions.width20,right: Dimensions.width20),
-                    child: BigText(
-                      text: "${product.price!} zł | Do Koszyka",
-                      color: Colors.white
-                      ),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(Dimensions.radius20),
                     color: Colors.blueAccent,
                   ),
+                    child: BigText(
+                      text: "${product.price!} zł | Do Koszyka",
+                      color: Colors.white
+                      ),
                 ),
               )
            ]));

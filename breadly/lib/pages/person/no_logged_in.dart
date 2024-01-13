@@ -19,7 +19,7 @@ class NoLoggedIn extends StatelessWidget {
                 width: double.maxFinite,
                 height: Dimensions.height20*16,
                 margin: EdgeInsets.only(left: Dimensions.width20, right: Dimensions.width20),
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   image: DecorationImage(
                     fit:BoxFit.cover,
                     image: AssetImage(

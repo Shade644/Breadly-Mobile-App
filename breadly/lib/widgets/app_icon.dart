@@ -1,7 +1,4 @@
-import 'package:breadly/utils/dimensions.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 
 class AppIcon extends StatelessWidget {
   final IconData icon;
@@ -10,13 +7,13 @@ class AppIcon extends StatelessWidget {
   final double size;
   final double iconSize;
 
-   AppIcon({Key? key,
+   const AppIcon({super.key,
   required this.icon,
   this.backgroundColor=const Color(0xFFfcf4e4),
   this.iconColor=const Color(0xFF756d54),
   this.size=40,
   this.iconSize=16,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

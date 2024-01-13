@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'package:breadly/data/repository/auth_repo.dart';
 import 'package:breadly/models/response_model.dart';
 import 'package:breadly/models/signin_model.dart';
@@ -39,7 +38,7 @@ class AuthController extends GetxController implements GetxService {
     _isLoading = true;
     update();
     Response response = await authRepo.login(signInBody);
-    print("Login Token "+response.body["acces_token"].toString());
+    print("Login Token ${response.body["acces_token"]}");
     late ResponseModel responseModel;
     if (response.statusCode == 200) {
       print("backend");
@@ -47,7 +46,7 @@ class AuthController extends GetxController implements GetxService {
       final decodedToken = authRepo.decodeToken(response.body["acces_token"]);
       userId = decodedToken["user_id"].toString();
       AppConstants.USER_ID = userId;
-      print("Token w AppConstants "+AppConstants.USER_ID.toString());
+      print("Token w AppConstants ${AppConstants.USER_ID}");
       print("Decoded Token: $userId");
       responseModel = ResponseModel(true, response.body["acces_token"]);
     } else {

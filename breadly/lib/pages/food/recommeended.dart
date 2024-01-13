@@ -1,7 +1,6 @@
 import 'package:breadly/controllers/cart_controller.dart';
 import 'package:breadly/controllers/popular_product_controller.dart';
 import 'package:breadly/controllers/recommended_product_controller.dart';
-import 'package:breadly/pages/cart/cart_page.dart';
 import 'package:breadly/routes/route_helper.dart';
 import 'package:breadly/utils/app_constants.dart';
 import 'package:breadly/utils/dimensions.dart';
@@ -14,7 +13,7 @@ import '../../widgets/Big_text.dart';
 class RecommenededFood extends StatelessWidget {
   final int pageID;
   final String page;
-   RecommenededFood({super.key, required this.pageID, required this.page});
+   const RecommenededFood({super.key, required this.pageID, required this.page});
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +38,7 @@ class RecommenededFood extends StatelessWidget {
                     Get.toNamed(RouteHelper.getInitial());                    
                   }
                 },
-                child:  AppIcon(icon: Icons.clear),
+                child:  const AppIcon(icon: Icons.clear),
               ),
              GetBuilder<PopularProductController>(builder: (controller){
               return GestureDetector(
@@ -50,9 +49,9 @@ class RecommenededFood extends StatelessWidget {
                 },
                 child: Stack(
                   children: [
-                     AppIcon(icon: Icons.shopping_cart_outlined),
+                     const AppIcon(icon: Icons.shopping_cart_outlined),
                      controller.totalItems >=1?
-                     Positioned(
+                     const Positioned(
                       right: 0,
                       top:0,
                          child: AppIcon(icon: Icons.circle, 
@@ -82,13 +81,10 @@ class RecommenededFood extends StatelessWidget {
                 ],
               ),
             bottom: PreferredSize(
-              preferredSize: Size.fromHeight(20),
+              preferredSize: const Size.fromHeight(20),
               child: Container(
-                child: Center(
-                  child: BigText(size:Dimensions.font26, text: product.name!)
-                  ),
                 width: double.maxFinite,
-                padding: EdgeInsets.only(top:5,bottom: 10),
+                padding: const EdgeInsets.only(top:5,bottom: 10),
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
@@ -96,10 +92,13 @@ class RecommenededFood extends StatelessWidget {
                     topRight: Radius.circular(Dimensions.radius20),
                   )
                 ),
+                child: Center(
+                  child: BigText(size:Dimensions.font26, text: product.name!)
+                  ),
               )
             ),
             pinned: true,
-            backgroundColor: Color.fromARGB(255, 102, 149, 26),
+            backgroundColor: const Color.fromARGB(255, 102, 149, 26),
             expandedHeight: 300,
             flexibleSpace: FlexibleSpaceBar(
               background: Image.network(
@@ -147,7 +146,7 @@ class RecommenededFood extends StatelessWidget {
                     icon: Icons.remove
                     ),
                   ),
-                     BigText(text: "${product.price!} zł"+" x " "${controller.inCartItems} ",size:Dimensions.font26),
+                     BigText(text: "${product.price!} zł"" x " "${controller.inCartItems} ",size:Dimensions.font26),
                   GestureDetector(
                     onTap: () {
                       controller.setQuantity(true);
@@ -166,7 +165,7 @@ class RecommenededFood extends StatelessWidget {
             height: Dimensions.bottomHeightBar,
             padding: EdgeInsets.only(top:Dimensions.height30,bottom: Dimensions.height30,left: Dimensions.width20,right: Dimensions.width20),
            decoration: BoxDecoration(
-            color: Color.fromARGB(134, 196, 196, 196),
+            color: const Color.fromARGB(134, 196, 196, 196),
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(Dimensions.radius20*2),
               topRight: Radius.circular(Dimensions.radius20*2),
@@ -181,7 +180,7 @@ class RecommenededFood extends StatelessWidget {
                   borderRadius: BorderRadius.circular(Dimensions.radius20),
                   color:Colors.white
                 ),
-                child: Icon(
+                child: const Icon(
                   Icons.favorite,
                   color: Colors.blueAccent,
                 ),
@@ -192,11 +191,11 @@ class RecommenededFood extends StatelessWidget {
                 },
                 child: Container(
                 padding: EdgeInsets.only(top:Dimensions.height20,bottom: Dimensions.height20,left: Dimensions.width20,right: Dimensions.width20),
-                 child: BigText(text: " ${product.price!} zł | Do Koszyka",color: Colors.white),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(Dimensions.radius20),
                   color: Colors.blueAccent,
                 ),
+                 child: BigText(text: " ${product.price!} zł | Do Koszyka",color: Colors.white),
               ),
               )
            ]),

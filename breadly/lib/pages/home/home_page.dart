@@ -1,7 +1,6 @@
-import 'package:breadly/pages/auth/singin_page.dart';
-import 'package:breadly/pages/auth/singup_page.dart';
 import 'package:breadly/pages/cart/cart_history.dart';
 import 'package:breadly/pages/home/main_page.dart';
+import 'package:breadly/pages/map/map_page.dart';
 import 'package:breadly/pages/person/person_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -32,35 +31,35 @@ class _HomePageState extends State<HomePage> {
 
   List<Widget> _buildScreens() {
     return [
-      MainPage(),
-      Container(child: Text("test"),),
-      CartHistory(),
-      PersonPage(),
+      const MainPage(),
+      const MapPage(),
+      const CartHistory(),
+      const PersonPage(),
     ];
   }
 
   List<PersistentBottomNavBarItem> _navBarsItems() {
     return [
       PersistentBottomNavBarItem(
-        icon: Icon(CupertinoIcons.home),
+        icon: const Icon(CupertinoIcons.home),
         title: ("Home"),
         activeColorPrimary: CupertinoColors.activeBlue,
         inactiveColorPrimary: CupertinoColors.systemGrey,
       ),
       PersistentBottomNavBarItem(
-        icon: Icon(CupertinoIcons.archivebox_fill),
+        icon: const Icon(CupertinoIcons.archivebox_fill),
         title: ("Archiwum"),
         activeColorPrimary: CupertinoColors.activeBlue,
         inactiveColorPrimary: CupertinoColors.systemGrey,
       ),
       PersistentBottomNavBarItem(
-        icon: Icon(CupertinoIcons.cart_fill),
+        icon: const Icon(CupertinoIcons.cart_fill),
         title: ("Koszyk"),
         activeColorPrimary: CupertinoColors.activeBlue,
         inactiveColorPrimary: CupertinoColors.systemGrey,
       ),
       PersistentBottomNavBarItem(
-        icon: Icon(CupertinoIcons.person_2_fill),
+        icon: const Icon(CupertinoIcons.person_2_fill),
         title: ("Konto"),
         activeColorPrimary: CupertinoColors.activeBlue,
         inactiveColorPrimary: CupertinoColors.systemGrey,
@@ -87,10 +86,10 @@ class _HomePageState extends State<HomePage> {
       ),
       popAllScreensOnTapOfSelectedTab: true,
       popActionScreens: PopActionScreensType.all,
-      itemAnimationProperties: ItemAnimationProperties(
+      itemAnimationProperties: const ItemAnimationProperties(
         curve: Curves.ease,
       ),
-      screenTransitionAnimation: ScreenTransitionAnimation(
+      screenTransitionAnimation: const ScreenTransitionAnimation(
         animateTabTransition: true,
         curve: Curves.ease,
         duration: Duration(milliseconds: 200),

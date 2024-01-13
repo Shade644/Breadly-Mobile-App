@@ -1,4 +1,3 @@
-import 'package:breadly/data/API/api_client.dart';
 import 'package:breadly/data/API/api_client_mvs.dart';
 import 'package:breadly/utils/app_constants.dart';
 import 'package:get/get.dart';
