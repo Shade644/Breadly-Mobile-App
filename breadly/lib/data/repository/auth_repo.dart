@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:breadly/data/API/api_client.dart';
 import 'package:breadly/models/signin_model.dart';
 import 'package:breadly/models/signup_model.dart';

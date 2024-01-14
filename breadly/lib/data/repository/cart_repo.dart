@@ -11,14 +11,12 @@ class CartRepo{
   List<String> cartHistory=[];
 
   void addToCartList(List<CartModel> cartList){
-    // sharedPreferences.remove(AppConstants.CART_LIST);
-    // sharedPreferences.remove(AppConstants.CART_HISTORY_LIST);
     var time = DateTime.now().toString();
     cart=[];
-    for (var element in cartList) {
+    cartList.forEach((element) {
       element.time = time;
-      continue;
-    }
+      return cart.add(jsonEncode(element));
+    });
     sharedPreferences.setStringList(AppConstants.CART_LIST, cart);
     // getCartList();
   
@@ -32,9 +30,7 @@ class CartRepo{
     }
     List<CartModel> cartList=[];
 
-    for (var element in carts) {
-      cartList.add(CartModel.fromJson(jsonDecode(element)));
-    }
+    carts.forEach((element) => cartList.add(CartModel.fromJson(jsonDecode(element))));
 
     return cartList;
   }
@@ -46,9 +42,7 @@ List<CartModel> getCartHistoryList(){
 
   }
   List<CartModel> cartListHistory=[];
-  for (var element in cartHistory) {
-    cartListHistory.add(CartModel.fromJson(jsonDecode(element)));
-  }
+  cartHistory.forEach((element) => cartListHistory.add(CartModel.fromJson(jsonDecode(element))));
   return cartListHistory;
 }
 
@@ -62,18 +56,19 @@ List<CartModel> getCartHistoryList(){
     }
     removeCart();
     sharedPreferences.setStringList(AppConstants.CART_HISTORY_LIST, cartHistory);
-  print("Ile: ${getCartHistoryList().length}");
+  print("Ile: " +getCartHistoryList().length.toString());
   for(int j=0; j<getCartHistoryList().length;j++){
-  print("time: ${getCartHistoryList()[j].time}");
+  print("time: "+getCartHistoryList()[j].time.toString());
   }
   }
   void removeCart(){
     cart=[];
     sharedPreferences.remove(AppConstants.CART_LIST);
   }
-  void clearCartHistory(){
+
+  void clearCartHistory() {
     removeCart();
-    cartHistory= [];
+    cartHistory = [];
     sharedPreferences.remove(AppConstants.CART_HISTORY_LIST);
   }
 }

@@ -44,6 +44,7 @@ class _MapPageState extends State<MapPage> {
               child: Text("Loading..."),
             )
           : GoogleMap(
+            
               onMapCreated: ((GoogleMapController controller) =>
                   _mapController.complete(controller)),
               initialCameraPosition: CameraPosition(

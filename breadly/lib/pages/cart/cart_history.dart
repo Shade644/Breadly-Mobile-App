@@ -44,16 +44,18 @@ class CartHistory extends StatelessWidget {
   print(itemsPerOrder);
   var listCounter=0;
 
-  Widget timeWidget (int index){
-    var outputDate = DateTime.now().toString();
-    if(index<getCartHistoryList.length){
-        DateTime parseDate = DateFormat("yyyy-MM-dd HH:mm:ss").parse(getCartHistoryList[listCounter].time!);
-        var inputDate = DateTime.parse(parseDate.toString());
-        var outputFormat = DateFormat("dd.MM.yyyy H:mm");
-        var outputDate =outputFormat.format(inputDate);
-    }
-    return BigText(text: outputDate);
+Widget timeWidget(int index) {
+  var outputDate = DateTime.now().toString();
+
+  if (index < getCartHistoryList.length) {
+    DateTime parseDate = DateFormat("yyyy-MM-dd HH:mm:ss").parse(getCartHistoryList[listCounter].time!);
+    var inputDate = DateTime.parse(parseDate.toString());
+    var outputFormat = DateFormat("dd-MM-yyyy HH:mm:ss"); // Change the format
+    outputDate = outputFormat.format(inputDate);
   }
+
+  return BigText(text: outputDate);
+}
     return Scaffold(
       body: Column(
         children: [

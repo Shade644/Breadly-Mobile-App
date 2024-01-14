@@ -32,8 +32,9 @@ class _HomePageState extends State<HomePage> {
   List<Widget> _buildScreens() {
     return [
       const MainPage(),
-      const MapPage(),
+      const Center(child: Text("Archiwum"),),
       const CartHistory(),
+      const MapPage(),
       const PersonPage(),
     ];
   }
@@ -55,6 +56,12 @@ class _HomePageState extends State<HomePage> {
       PersistentBottomNavBarItem(
         icon: const Icon(CupertinoIcons.cart_fill),
         title: ("Koszyk"),
+        activeColorPrimary: CupertinoColors.activeBlue,
+        inactiveColorPrimary: CupertinoColors.systemGrey,
+      ),
+      PersistentBottomNavBarItem(
+        icon: const Icon(CupertinoIcons.location),
+        title: ("Mapa"),
         activeColorPrimary: CupertinoColors.activeBlue,
         inactiveColorPrimary: CupertinoColors.systemGrey,
       ),

@@ -10,6 +10,7 @@ import 'package:breadly/widgets/app_icon.dart';
 import 'package:breadly/widgets/person_widge.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 class PersonPage extends StatelessWidget {
   const PersonPage({super.key});
@@ -22,6 +23,12 @@ class PersonPage extends StatelessWidget {
       Get.find<UserController>().getUserInfo();
     }
 
+    String _formatDateTime(String dateTimeString) {
+      DateTime dateTime = DateTime.parse(dateTimeString);
+      String formattedDateTime = DateFormat('dd-MM-yyyy HH:mm:ss').format(dateTime);
+
+  return formattedDateTime;
+}
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blueAccent,
@@ -88,14 +95,14 @@ class PersonPage extends StatelessWidget {
                     SizedBox(height: Dimensions.height10),
                     PersonWidget(
                         appIcon: AppIcon(
-                          icon: Icons.location_on,
+                          icon: Icons.timer_outlined,
                           backgroundColor: Colors.blueAccent,
                           iconColor: Colors.white,
                           iconSize: Dimensions.height30,
                           size: Dimensions.height50,
                         ),
                         bigText: BigText(
-                          text: "Adres",
+                          text:"Członek od: "+_formatDateTime(userController.userModel.created),
                         )),
                     SizedBox(height: Dimensions.height10),
                     GestureDetector(
@@ -121,21 +128,10 @@ class PersonPage extends StatelessWidget {
                             size: Dimensions.height50,
                           ),
                           bigText: BigText(
-                            text: "Logout",
+                            text: "Wyloguj Się!",
                           )),
                     ),
                     SizedBox(height: Dimensions.height10),
-                    PersonWidget(
-                        appIcon: AppIcon(
-                          icon: Icons.logout_outlined,
-                          backgroundColor: Colors.redAccent,
-                          iconColor: Colors.white,
-                          iconSize: Dimensions.height30,
-                          size: Dimensions.height50,
-                        ),
-                        bigText: BigText(
-                          text: "?",
-                        )),
                   ]),
                 ))
               ],
