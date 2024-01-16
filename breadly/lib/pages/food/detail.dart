@@ -35,7 +35,7 @@ class DetailFood extends StatelessWidget {
               image: DecorationImage(
                 fit:BoxFit.cover,
                 image: NetworkImage(
-                  AppConstants.BASE_URL+AppConstants.UPLOUD_URL+product.img!
+                 product.img!
                 ),
               ),
             ),

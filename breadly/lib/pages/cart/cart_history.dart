@@ -118,7 +118,7 @@ Widget timeWidget(int index) {
                                         image: DecorationImage(
                                           fit:BoxFit.cover,
                                         image: NetworkImage(
-                                          AppConstants.BASE_URL+AppConstants.UPLOUD_URL+getCartHistoryList[listCounter-1].img!
+                                          getCartHistoryList[listCounter-1].img!
                                         )
                                       ),
                                       ),

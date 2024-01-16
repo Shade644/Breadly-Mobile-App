@@ -105,7 +105,7 @@ class CartPage extends StatelessWidget {
                                         fit: BoxFit.cover,
                                         image:
                                             NetworkImage(
-                                              AppConstants.BASE_URL+AppConstants.UPLOUD_URL+cartController.getItems[index].img!
+                                              cartController.getItems[index].img!
                                             )
                                             ),
                                     borderRadius:

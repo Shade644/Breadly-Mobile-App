@@ -107,11 +107,11 @@ GetBuilder<RecommendedProductController>(builder: (recommendedProduct){
               height: Dimensions.listViewImgSize ,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(Dimensions.radius20),
-                color: Colors.white38,
+                color: Colors.white38, 
                 image: DecorationImage(
                   fit:BoxFit.cover,
                   image: NetworkImage(
-                AppConstants.BASE_URL+AppConstants.UPLOUD_URL+recommendedProduct.recommendedProductList[index].img!
+                recommendedProduct.recommendedProductList[index].img!
               ),
               ),
             ),
@@ -134,7 +134,7 @@ GetBuilder<RecommendedProductController>(builder: (recommendedProduct){
                     children: [
                       BigText(text: recommendedProduct.recommendedProductList[index].name!),
                       SizedBox(height: Dimensions.height10,),
-                      SmallText(text: "Opis Cały Ten"),
+                      SmallText(text: recommendedProduct.recommendedProductList[index].s_description!),
                       SizedBox(height: Dimensions.height10,),
                        const Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -216,7 +216,7 @@ GetBuilder<RecommendedProductController>(builder: (recommendedProduct){
             image: DecorationImage(
               fit: BoxFit.cover,
               image: NetworkImage(
-                AppConstants.BASE_URL+AppConstants.UPLOUD_URL+popularProduct.img!
+                popularProduct.img!,
               ),
               ),
                   ),

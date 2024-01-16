@@ -83,6 +83,7 @@ class ProductAdd(BaseModel):
     price: float
     stock: int
     stars: int
+    img: Optional[str]    
 
     class Config:
         orm_mode = True
