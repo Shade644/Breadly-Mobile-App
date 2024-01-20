@@ -1,5 +1,6 @@
 import 'package:breadly/controllers/popular_product_controller.dart';
 import 'package:breadly/controllers/recommended_product_controller.dart';
+import 'package:breadly/pages/Search/SearchPage.dart';
 import 'package:breadly/pages/home/page_body.dart';
 import 'package:breadly/utils/dimensions.dart';
 import 'package:breadly/widgets/Small_text.dart';
@@ -45,16 +46,21 @@ class _MainPageState extends State<MainPage> {
     
                 ],
               ),
-              Center(
-                child: Container(
-                  width: Dimensions.height50,
-                  height: Dimensions.height50,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(Dimensions.radius15),
-                    color: Colors.blueAccent,
-              
+              GestureDetector(
+                onTap: () {
+                  Get.to(SearchPage());
+                },
+                child: Center(
+                  child: Container(
+                    width: Dimensions.height50,
+                    height: Dimensions.height50,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(Dimensions.radius15),
+                      color: Colors.blueAccent,
+                
+                    ),
+                    child: Icon(Icons.search, color: Colors.white, size:Dimensions.icon24),
                   ),
-                  child: Icon(Icons.search, color: Colors.white, size:Dimensions.icon24),
                 ),
               ),
             ],

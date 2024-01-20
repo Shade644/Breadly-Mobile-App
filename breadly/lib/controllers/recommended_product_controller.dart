@@ -8,7 +8,9 @@ class RecommendedProductController extends GetxController{
   RecommendedProductController({required this.recommendedProductRepo});
   List<dynamic> _recommendedProductList = [];
   List<dynamic> get recommendedProductList => _recommendedProductList;
+  List<dynamic> _filteredProductList = [];
 
+  List<dynamic> get filteredProductList => _filteredProductList;
   bool _isLoaded =  false;
   bool get isLoaded => _isLoaded;
   
@@ -25,5 +27,16 @@ class RecommendedProductController extends GetxController{
     else {
       print("error");
     }
+  }
+ void filterProducts(String query) {
+    if (query.isEmpty) {
+      _filteredProductList = _recommendedProductList;
+    } else {
+      _filteredProductList = _recommendedProductList.where((product) {
+        return product.name.toLowerCase().contains(query.toLowerCase());
+      }).toList();
+    }
+
+    update();
   }
 }

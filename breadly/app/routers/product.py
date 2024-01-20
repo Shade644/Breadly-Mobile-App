@@ -11,12 +11,19 @@ router = APIRouter(
 
 
 #pobieranie produktów
-@router.get("/", response_model= List[schemas.Product] )
-def get_products(db: Session = Depends(get_db), limit: int = 10000, skip: int = 0, search: Optional[str]= ""):
+@router.get("/", response_model=Dict[str, Union[List[schemas.Product], int]])
+def get_products(db: Session = Depends(get_db), limit: int = 10000, skip: int = 0, search: Optional[str] = ""):
     
+    # Zapytanie wybierające produkty, które zawierają frazę w nazwie
     products = db.query(models.Product).filter(models.Product.name.contains(search)).limit(limit).offset(skip).all()
 
-    return products
+    # Liczba wszystkich produktów spełniających kryteria
+    count = db.query(models.Product).filter(models.Product.name.contains(search)).count()
+
+    # Zwracamy słownik z listą produktów i liczbą produktów
+    result = {"products": products, "count": count}
+
+    return result
 
 
 #pobieranie best produktów (best = 5 gwiazdek)

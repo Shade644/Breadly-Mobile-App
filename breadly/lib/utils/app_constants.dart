@@ -4,7 +4,7 @@ class AppConstants{
 
   static const String BASE_URL_LOCAL = "http://192.168.18.48:8000/";  
   static const String POPULAR_PRODUCT_URL = "products/best/";
-  static const String RECOMMENDED_PRODUCT_URL = "products/best/";
+  static const String RECOMMENDED_PRODUCT_URL = "products/";
   static const String TOKEN="";
   static const String PHONE="";
   static const String PASSWORD="";    
