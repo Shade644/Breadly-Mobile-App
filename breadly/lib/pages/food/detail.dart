@@ -116,7 +116,7 @@ class DetailFood extends StatelessWidget {
                child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                  children: [
-                     AppColumn(text:product.name!),
+                     AppColumn(text: product.name!, stars: product.stars ?? 5),
                      SizedBox(height: Dimensions.height20),
                     BigText(text: "Opis"),
                     SizedBox(height: Dimensions.height20),

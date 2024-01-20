@@ -9,12 +9,16 @@ class RecommendedProductController extends GetxController{
   List<dynamic> _recommendedProductList = [];
   List<dynamic> get recommendedProductList => _recommendedProductList;
   List<dynamic> _filteredProductList = [];
+  Map<String, int> _productIndices = {};
 
   List<dynamic> get filteredProductList => _filteredProductList;
   bool _isLoaded =  false;
   bool get isLoaded => _isLoaded;
-  
 
+    int findIndexByName(String name) {
+    return _productIndices[name] ?? -1;
+  }
+  
   Future<void> getRecommendedProductList() async{
     Response response = await recommendedProductRepo.getRecommendedProductList();
     if(response.statusCode == 200){
@@ -28,13 +32,19 @@ class RecommendedProductController extends GetxController{
       print("error");
     }
   }
- void filterProducts(String query) {
+
+void filterProducts(String query) {
     if (query.isEmpty) {
-      _filteredProductList = _recommendedProductList;
+      _filteredProductList = List.from(_recommendedProductList);
     } else {
-      _filteredProductList = _recommendedProductList.where((product) {
-        return product.name.toLowerCase().contains(query.toLowerCase());
-      }).toList();
+      _filteredProductList = _recommendedProductList
+          .where((product) => product.name.toLowerCase().contains(query.toLowerCase()))
+          .toList();
+
+      _filteredProductList.forEach((product) {
+        int index = _recommendedProductList.indexOf(product);
+        _productIndices[product.name!] = index;
+      });
     }
 
     update();

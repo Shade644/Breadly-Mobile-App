@@ -2,7 +2,6 @@ import 'package:breadly/controllers/cart_controller.dart';
 import 'package:breadly/controllers/popular_product_controller.dart';
 import 'package:breadly/controllers/recommended_product_controller.dart';
 import 'package:breadly/routes/route_helper.dart';
-import 'package:breadly/utils/app_constants.dart';
 import 'package:breadly/utils/dimensions.dart';
 import 'package:breadly/widgets/app_icon.dart';
 import 'package:breadly/widgets/expandable_text.dart';

@@ -248,7 +248,7 @@ GetBuilder<RecommendedProductController>(builder: (recommendedProduct){
           ),
           child: Container(
             padding:  EdgeInsets.only(top:Dimensions.height10, left:Dimensions.width15, right:Dimensions.width30),
-            child: AppColumn(text:popularProduct.name!),
+            child: AppColumn(text:popularProduct.name!, stars: popularProduct.stars!,),
           ),
         ),
         

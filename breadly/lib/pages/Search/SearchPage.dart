@@ -18,6 +18,16 @@ class SearchPage extends StatelessWidget {
 class SearchBody extends StatelessWidget {
   final TextEditingController _searchController = TextEditingController();
 
+  int transformIndex(int searchIndex, RecommendedProductController controller) {
+    if (searchIndex >= 0 &&
+        searchIndex < controller.filteredProductList.length) {
+      String productName = controller.filteredProductList[searchIndex].name!;
+      int originalIndex = controller.findIndexByName(productName);
+      return originalIndex;
+    }
+    return -1;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -52,19 +62,32 @@ class SearchBody extends StatelessWidget {
                   );
                 }
 
-                return ListView.builder(
+                return ListView.separated(
                   itemCount: recommendedProduct.filteredProductList.length,
+                  separatorBuilder: (context, index) =>
+                      Divider(),
                   itemBuilder: (context, index) {
                     var product = recommendedProduct.filteredProductList[index];
 
                     return ListTile(
                       leading: CircleAvatar(
-                        backgroundImage: NetworkImage(product.img ??''), // Tutaj dodaj zdjęcie z produktu (może być null, dlatego używamy ?? '')
+                        backgroundImage: NetworkImage(product.img ?? ''),
                       ),
                       title: Text(product.name),
                       subtitle: Text(product.s_description),
                       onTap: () {
-                        Get.toNamed(RouteHelper.getDetailFood(index, "home"));
+                        int originalIndex =
+                            transformIndex(index, recommendedProduct);
+
+                        if (originalIndex != -1) {
+                          Get.toNamed(RouteHelper.getRecommendedFood(
+                              originalIndex, "home"));
+                        } else {
+                          Get.snackbar(
+                            'Product Not Found',
+                            'Błąd podczas uzyskiwania oryginalnego indeksu produktu.',
+                          );
+                        }
                       },
                     );
                   },

@@ -31,7 +31,7 @@ def get_products(db: Session = Depends(get_db), limit: int = 10000, skip: int = 
 def get_products(db: Session = Depends(get_db), limit: int = 10000, skip: int = 0, search: Optional[str]= ""):
     
     # Zapytanie wybierające produkty o polu "stars" równe 5
-    products = db.query(models.Product).filter(models.Product.name.contains(search), models.Product.stars == 5).limit(limit).offset(skip).all()
+    products = db.query(models.Product).filter(models.Product.name.contains(search), models.Product.stars >= 4).limit(limit).offset(skip).all()
 
     # Liczba produktów spełniających kryteria
     count = db.query(models.Product).filter(models.Product.stars == 5).count()

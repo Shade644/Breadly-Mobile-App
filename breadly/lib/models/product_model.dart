@@ -42,7 +42,6 @@ class ProductModel {
   String? createdAt;
   String? updatedAt;
   int? typeId;
-
   ProductModel({
     required this.id,
     this.name,
@@ -56,13 +55,16 @@ class ProductModel {
     this.typeId,
   });
 
+
   factory ProductModel.fromJson(Map<String, dynamic> json) {
     return ProductModel(
       id: json['id'],
       name: json['name'],
       description: json['description'],
       s_description: json['short_description'],
-      price: json['price'] is int ? json['price'] : (json['price'] as num)?.toInt(),
+      price: json['price'] is int
+          ? json['price']
+          : (json['price'] as num)?.toInt(),
       stars: json['stars'],
       img: json['img'],
       createdAt: json['created_at'],
@@ -77,6 +79,7 @@ class ProductModel {
       "name": name,
       "price": price,
       "img": img,
+      "stars": stars,
       "createdAt": createdAt,
       "updatedAt": updatedAt,
     };
