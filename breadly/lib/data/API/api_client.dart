@@ -51,13 +51,13 @@ class ApiClient extends GetConnect implements GetxService{
     }
   }
   Future<Response> postData(String uri, dynamic body) async {
-    print(body.toString());
-    try{
+    print("Dane:"+body.toString());
+    try{ 
      Response response = await post(uri, body, headers: _mainHeadersReg);
      print(response.toString());
      return response;
     }catch(e){
-      print(e.toString());
+      print("ten bład 2"+e.toString());
       return Response(statusCode: 1,statusText: e.toString());
     }
   }
@@ -80,7 +80,7 @@ Future<Response> postDataLogin(String uri, SignInBody body) async {
     print("Pełne żądanie: $uri - ${jsonEncode(encodedBody)} - $_mainHeaders");
     return response;
   } catch (e) {
-    print(e.toString());
+    print("Błąd "+e.toString());
     return Response(statusCode: 1, statusText: e.toString());
   }
 }
