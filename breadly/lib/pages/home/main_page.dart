@@ -38,10 +38,11 @@ class _MainPageState extends State<MainPage> {
               Column(
                 children: [
                   BigText(text:"Breadly"),
+                  SizedBox(height: Dimensions.height10/5,),
                   Row(
                     children: [
+                    const Icon(Icons.location_on, size:16,),
                     SmallText(text:"Bochnia", color: Colors.black54),
-                    const Icon(Icons.arrow_drop_down)
                   ],)
     
                 ],

@@ -7,14 +7,15 @@ import 'icon_and_text.dart';
 class AppColumn extends StatelessWidget {
   final String text;
   final int stars;
+  final int price;
+  final int stock;
 
-  const AppColumn({super.key, required this.text, required this.stars});
+  const AppColumn({super.key, required this.text, required this.stars, required this.price, required this.stock});
 
   String formatStarsText(int stars) {
-    return stars == 4 ? "Gwiazdki" : (stars == 5 ? "Gwiazdek" :"");
+    return stars == 4 ? "Gwiazdki" : (stars == 5 ? "Gwiazdek" : "");
   }
-  
-  
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -25,7 +26,10 @@ class AppColumn extends StatelessWidget {
         Row(
           children: [
             Wrap(
-              children: List.generate(stars, (index) => const Icon(Icons.star, color: Colors.amberAccent, size: 18)),
+              children: List.generate(
+                  stars,
+                  (index) => const Icon(Icons.star,
+                      color: Colors.amberAccent, size: 18)),
             ),
             SizedBox(width: Dimensions.width10),
             SmallText(text: stars.toString()),
@@ -33,13 +37,20 @@ class AppColumn extends StatelessWidget {
             SmallText(text: formatStarsText(stars)),
           ],
         ),
-        SizedBox(height: Dimensions.height20),
-        const Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        SizedBox(height: Dimensions.height15),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            IconText(icon: Icons.circle_sharp, text: "Normal", iconColor: Colors.orange),
-            IconText(icon: Icons.location_on, text: "1,7 km", iconColor: Colors.green),
-            IconText(icon: Icons.access_time_rounded, text: "32min", iconColor: Colors.redAccent),
+                IconText(
+                    icon: Icons.money_sharp, 
+                    text: price.toString()+ " zł", 
+                    iconColor: Colors.green
+                    ),
+                IconText(
+                    icon: Icons.cookie_outlined, 
+                    text: stock.toString()+ " Sztuk", 
+                    iconColor: const Color.fromARGB(255, 112, 53, 31)
+                    ),
           ],
         )
       ],

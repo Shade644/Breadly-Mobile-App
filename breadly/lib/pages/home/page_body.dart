@@ -73,6 +73,7 @@ GetBuilder<PopularProductController>(builder: (popularProducts){
   decorator: DotsDecorator(
     size: const Size.square(9.0),
     activeSize: const Size(18.0, 9.0),
+    activeColor: Colors.deepPurple,
     activeShape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
   ),
 );
@@ -136,23 +137,18 @@ GetBuilder<RecommendedProductController>(builder: (recommendedProduct){
                       SizedBox(height: Dimensions.height10,),
                       SmallText(text: recommendedProduct.recommendedProductList[index].s_description!),
                       SizedBox(height: Dimensions.height10,),
-                       const Row(
+                     Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                  IconText(
-                    icon: Icons.circle_sharp, 
-                    text: "Normal", 
-                    iconColor: Colors.orange
-                    ),
                       IconText(
-                    icon: Icons.location_on, 
-                    text: "1,7 km", 
+                    icon: Icons.money_sharp, 
+                    text: recommendedProduct.recommendedProductList[index].price!.toString()+ " zł", 
                     iconColor: Colors.green
                     ),
                       IconText(
-                    icon: Icons.access_time_rounded, 
-                    text: "32min", 
-                    iconColor: Colors.redAccent
+                    icon: Icons.cookie_outlined, 
+                    text: recommendedProduct.recommendedProductList[index].stock!.toString()+ " Sztuk", 
+                    iconColor: const Color.fromARGB(255, 112, 53, 31)
                     ),
                 ],)
                     ],
@@ -248,7 +244,7 @@ GetBuilder<RecommendedProductController>(builder: (recommendedProduct){
           ),
           child: Container(
             padding:  EdgeInsets.only(top:Dimensions.height10, left:Dimensions.width15, right:Dimensions.width30),
-            child: AppColumn(text:popularProduct.name!, stars: popularProduct.stars!,),
+            child: AppColumn(text:popularProduct.name!, stars: popularProduct.stars!, price: popularProduct.price!, stock: popularProduct.stock!,),
           ),
         ),
         

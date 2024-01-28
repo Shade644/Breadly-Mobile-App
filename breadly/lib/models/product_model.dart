@@ -37,6 +37,7 @@ class ProductModel {
   String? description;
   String? s_description;
   int? price;
+  int? stock;
   int? stars;
   String? img;
   String? createdAt;
@@ -47,6 +48,7 @@ class ProductModel {
     this.name,
     this.description,
     this.s_description,
+    this.stock,
     this.price,
     this.stars,
     this.img,
@@ -67,6 +69,7 @@ class ProductModel {
           : (json['price'] as num)?.toInt(),
       stars: json['stars'],
       img: json['img'],
+      stock: json['stock'],
       createdAt: json['created_at'],
       updatedAt: json['updated_at'],
       typeId: json['type_id'],
@@ -78,6 +81,7 @@ class ProductModel {
       "id": id,
       "name": name,
       "price": price,
+      "stock": stock,
       "img": img,
       "stars": stars,
       "createdAt": createdAt,

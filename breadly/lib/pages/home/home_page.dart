@@ -43,13 +43,13 @@ class _HomePageState extends State<HomePage> {
     return [
       PersistentBottomNavBarItem(
         icon: const Icon(CupertinoIcons.home),
-        title: ("Home"),
+        title: ("Menu"),
         activeColorPrimary: CupertinoColors.activeBlue,
         inactiveColorPrimary: CupertinoColors.systemGrey,
       ),
       PersistentBottomNavBarItem(
-        icon: const Icon(CupertinoIcons.archivebox_fill),
-        title: ("Archiwum"),
+        icon: const Icon(CupertinoIcons.chat_bubble_text_fill),
+        title: ("Blog"),
         activeColorPrimary: CupertinoColors.activeBlue,
         inactiveColorPrimary: CupertinoColors.systemGrey,
       ),

@@ -30,11 +30,16 @@ class CartPage extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  AppIcon(
-                    icon: Icons.arrow_back_ios,
-                    iconColor: Colors.white,
-                    backgroundColor: Colors.blueAccent,
-                    iconSize: Dimensions.icon24,
+                  GestureDetector(
+                    onTap: (){
+                      Get.back();
+                    },
+                    child: AppIcon(
+                      icon: Icons.arrow_back_ios,
+                      iconColor: Colors.white,
+                      backgroundColor: Colors.blueAccent,
+                      iconSize: Dimensions.icon24,
+                    ),
                   ),
                   SizedBox(
                     width: Dimensions.width20 * 5,
@@ -229,8 +234,8 @@ class CartPage extends StatelessWidget {
                     children: [
                         Container(
                             padding: EdgeInsets.only(
-                                top: Dimensions.height20,
-                                bottom: Dimensions.height20,
+                                top: Dimensions.height15,
+                                bottom: Dimensions.height15,
                                 left: Dimensions.width20,
                                 right: Dimensions.width20),
                             decoration: BoxDecoration(
@@ -255,7 +260,7 @@ class CartPage extends StatelessWidget {
                                   return OrderDetail(
                                     productId: item.product!.id!,
                                     quantity: item.quantity!,
-                                    totalPrice: cartController.totalAmount.toDouble(),
+                                    totalPrice: item.quantity!.toDouble() * item.product!.price!,
                                   );
                                 }).toList(),
                               );
@@ -269,8 +274,8 @@ class CartPage extends StatelessWidget {
                           },
                           child: Container(
                             padding: EdgeInsets.only(
-                                top: Dimensions.height20,
-                                bottom: Dimensions.height20,
+                                top: Dimensions.height15,
+                                bottom: Dimensions.height15,
                                 left: Dimensions.width20,
                                 right: Dimensions.width20),
                             decoration: BoxDecoration(

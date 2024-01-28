@@ -116,7 +116,7 @@ class DetailFood extends StatelessWidget {
                child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                  children: [
-                     AppColumn(text: product.name!, stars: product.stars ?? 5),
+                     AppColumn(text: product.name!, stars: product.stars ?? 5, stock: product.stock!, price:product.price!),
                      SizedBox(height: Dimensions.height20),
                     BigText(text: "Opis"),
                     SizedBox(height: Dimensions.height20),
@@ -148,7 +148,7 @@ class DetailFood extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
-                padding: EdgeInsets.only(top:Dimensions.height20,bottom: Dimensions.height20,left: Dimensions.width20,right: Dimensions.width20),
+                padding: EdgeInsets.only(top:Dimensions.height15,bottom: Dimensions.height15,left: Dimensions.width20,right: Dimensions.width20),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(Dimensions.radius20),
                   color:Colors.white
@@ -179,7 +179,7 @@ class DetailFood extends StatelessWidget {
                     popularProduct.addItem(product);
                   },
                 child: Container(
-                  padding: EdgeInsets.only(top:Dimensions.height20,bottom: Dimensions.height20,left: Dimensions.width20,right: Dimensions.width20),
+                  padding: EdgeInsets.only(top:Dimensions.height15,bottom: Dimensions.height15,left: Dimensions.width20,right: Dimensions.width20),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(Dimensions.radius20),
                     color: Colors.blueAccent,
