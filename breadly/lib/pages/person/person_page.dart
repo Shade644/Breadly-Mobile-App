@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
+
 class PersonPage extends StatelessWidget {
   const PersonPage({super.key});
 

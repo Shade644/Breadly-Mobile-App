@@ -93,10 +93,7 @@ class CartPage extends StatelessWidget {
                                                     popularIndex, "cartpage"));
                                           } else {
                                             var recommeendedIndex = Get.find<
-                                                    RecommendedProductController>()
-                                                .recommendedProductList
-                                                .indexOf(
-                                                    cartList[index].product!);
+                                                    RecommendedProductController>().recommendedProductList.indexOf(cartList[index].product!);
                                             if (recommeendedIndex < 0) {
                                               Get.snackbar("Historia Zamówień",
                                                   "Produkt nie jest już dostępny");
@@ -117,8 +114,7 @@ class CartPage extends StatelessWidget {
                                             image: DecorationImage(
                                                 fit: BoxFit.cover,
                                                 image: NetworkImage(
-                                                    cartController
-                                                        .getItems[index].img!)),
+                                                    cartController.getItems[index].img!)),
                                             borderRadius: BorderRadius.circular(
                                                 Dimensions.radius20),
                                             color: Colors.white,
@@ -138,8 +134,7 @@ class CartPage extends StatelessWidget {
                                               MainAxisAlignment.spaceEvenly,
                                           children: [
                                             BigText(
-                                              text: cartController
-                                                  .getItems[index].name!,
+                                              text: cartController.getItems[index].name!,
                                               color: Colors.black54,
                                             ),
                                             SmallText(text: "Spicy"),
@@ -167,18 +162,13 @@ class CartPage extends StatelessWidget {
                                                     decoration: BoxDecoration(
                                                         borderRadius:
                                                             BorderRadius.circular(
-                                                                Dimensions
-                                                                    .radius20),
+                                                                Dimensions.radius20),
                                                         color: Colors.white),
                                                     child: Row(
                                                       children: [
                                                         GestureDetector(
                                                             onTap: () {
-                                                              cartController.addItem(
-                                                                  cartList[
-                                                                          index]
-                                                                      .product!,
-                                                                  -1);
+                                                              cartController.addItem(cartList[index].product!,-1);
                                                             },
                                                             child: const Icon(
                                                                 Icons.remove,
@@ -189,10 +179,7 @@ class CartPage extends StatelessWidget {
                                                                     .width10 /
                                                                 2),
                                                         BigText(
-                                                            text: cartList[
-                                                                    index]
-                                                                .quantity
-                                                                .toString()), //popularProduct.inCartItems.toString()),
+                                                            text: cartList[index].quantity.toString()), //popularProduct.inCartItems.toString()),
                                                         SizedBox(
                                                             width: Dimensions
                                                                     .width10 /
@@ -200,10 +187,7 @@ class CartPage extends StatelessWidget {
                                                         GestureDetector(
                                                             onTap: () {
                                                               cartController.addItem(
-                                                                  cartList[
-                                                                          index]
-                                                                      .product!,
-                                                                  1);
+                                                                  cartList[index].product!,1);
                                                             },
                                                             child: const Icon(
                                                                 Icons.add,
@@ -265,21 +249,20 @@ class CartPage extends StatelessWidget {
                           onTap: () {
                             if (Get.find<AuthController>().userLoggedIn()) {
                               print("Zalogowany");
-                              cartController.addToHistory();
-                              print("Przed placeOrders " +
-                                  cartController.totalAmount.toString());
+                              print("Przed placeOrders " +cartController.totalAmount.toString());
                               PlaceOrderBody placeOrder = PlaceOrderBody(
-                                details: [
-                                  OrderDetail(
-                                    productId: 12,
-                                    quantity: 10,
-                                    totalPrice: 30,
-                                  ),
-                                ],
+                                details: cartController.getItems.map((item) {
+                                  return OrderDetail(
+                                    productId: item.product!.id!,
+                                    quantity: item.quantity!,
+                                    totalPrice: cartController.totalAmount.toDouble(),
+                                  );
+                                }).toList(),
                               );
                               Get.find<OrderController>()
                                   .placeOrders(placeOrder);
                               print("Po placeOrders " + placeOrder.toString());
+                             cartController.addToHistory();
                             } else {
                               Get.toNamed(RouteHelper.getSingInPage());
                             }

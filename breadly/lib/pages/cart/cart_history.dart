@@ -50,7 +50,7 @@ Widget timeWidget(int index) {
   if (index < getCartHistoryList.length) {
     DateTime parseDate = DateFormat("yyyy-MM-dd HH:mm:ss").parse(getCartHistoryList[listCounter].time!);
     var inputDate = DateTime.parse(parseDate.toString());
-    var outputFormat = DateFormat("dd-MM-yyyy HH:mm:ss"); // Change the format
+    var outputFormat = DateFormat("dd-MM-yyyy HH:mm:ss"); 
     outputDate = outputFormat.format(inputDate);
   }
 
