@@ -50,6 +50,6 @@
 	<string>NSLocationWhenInUseUsageDescription</string>
 	<key>Chcesz wyświetlić lokalizacje na mapie?</key>
 	<string>NSLocationAlwaysAndWhenInUseUsageDescription</string>
-	<key>Chcesz wyświetlić lokalizacje na mapie?</key>
+	<key>Chcesz wyświetlić by aplikacjia pobierała informacje o lokalizacji w tle?</key>
 </dict>
 </plist>

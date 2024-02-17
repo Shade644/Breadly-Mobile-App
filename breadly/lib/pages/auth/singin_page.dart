@@ -42,7 +42,7 @@ class SingInPage extends StatelessWidget {
           if(status.isSuccess){
             print("success");
             Get.toNamed(RouteHelper.getInitial());
-          }
+          } 
           else{
             showMessage(status.message);
           }

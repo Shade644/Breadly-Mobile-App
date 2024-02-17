@@ -51,7 +51,6 @@ Map<String, dynamic> decodeToken(String token) {
   String normalized = base64Url.normalize(parts[1]);
   int paddingLength = (normalized.length % 4 == 0) ? 0 : (4 - normalized.length % 4);
   String padding = '=' * paddingLength;
-
   String decodedData = utf8.decode(base64Url.decode(normalized + padding));
   return json.decode(decodedData);
 }

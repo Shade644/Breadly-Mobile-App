@@ -1,3 +1,4 @@
+// ignore_for_file: constant_identifier_names, non_constant_identifier_names
 class AppConstants{
   static const String APP_NAME = "DBFood";
   static const int APP_VERSION = 1;
@@ -18,6 +19,8 @@ class AppConstants{
   static const String LOGIN_URL = "login";
   static String USER_URL = "users/$USER_ID";
   static String USER_ID = "";
-  static String GOOGLE_MAP_API = "AIzaSyAmy1lKK8VPaBYD-L_ZhiCoQQqW-CukCHI";  
-  
+  static String GOOGLE_MAP_API = "AIzaSyAmy1lKK8VPaBYD-L_ZhiCoQQqW-CukCHI";   
 }
+
+
+

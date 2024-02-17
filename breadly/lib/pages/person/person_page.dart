@@ -27,8 +27,7 @@ class PersonPage extends StatelessWidget {
     String _formatDateTime(String dateTimeString) {
       DateTime dateTime = DateTime.parse(dateTimeString);
       String formattedDateTime = DateFormat('dd-MM-yyyy HH:mm:ss').format(dateTime);
-
-  return formattedDateTime;
+      return formattedDateTime;
 }
     return Scaffold(
       appBar: AppBar(
@@ -113,7 +112,6 @@ class PersonPage extends StatelessWidget {
                         Get.find<AuthController>().clearSharedData();
                         Get.find<CartController>().clear();
                         Get.find<CartController>().clearCartHistory();
-                        // Get.find<UserController>().RemoveID();
                         Get.offNamed(RouteHelper.getSingInPage());
                         }
                         else{

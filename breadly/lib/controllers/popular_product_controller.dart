@@ -47,16 +47,15 @@ class PopularProductController extends GetxController{
   }
   int checkQuantity(int quantity){
     if((_inCartItems+quantity)<0){
-      Get.snackbar("Nie można zamówieć mniej niż zero", "Uspokuj się xD");
+      Get.snackbar("Błąd", "Dodaj przynajmniej jeden produkt do koszyka");
       if(_inCartItems>0){
         _quantity = -_inCartItems;
         return _quantity;
       }
       return 0;
     }
-    // po ilości z api do zrobienia
     else if((_inCartItems+quantity)>20){
-       Get.snackbar("Nie można zamówieć więcej niż dwadzieścia", "Uspokuj się xD");
+       Get.snackbar("Błąd", "Dodaj przynajmniej jeden produkt do koszyka");
       return 20;
     }
     else {

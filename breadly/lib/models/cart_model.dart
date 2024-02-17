@@ -3,6 +3,7 @@ import 'package:breadly/models/product_model.dart';
 class CartModel {
   int? id;
   String? name;
+  String? s_description;
   int? price;
   String? img;
   int? quantity;

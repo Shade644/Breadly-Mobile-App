@@ -47,11 +47,12 @@ class SingUpPage extends StatelessWidget {
       bool containsSpecialCharacter(String password) {
         return password.contains(RegExp(r'[!@#\$%^&*(),.?":{}|<>]'));
       }
+
       if (name.isEmpty) {
         showMessage("Wpisz Imię", title: "Imię");
       } else if (phone.isEmpty) {
         showMessage("Wpisz Numer Telefonu", title: "Numer Telefonu");
-      } else if (phone.length < 9) {
+      } else if (phone.length < 9 || !phone.startsWith('+') || !RegExp(r'^\d+$').hasMatch(phone)) {
         showMessage("Niepoprawny Numer Telefonu", title: "Numer Telefonu");
       } else if (email.isEmpty) {
         showMessage("Wpisz Adres Email", title: "Email");
