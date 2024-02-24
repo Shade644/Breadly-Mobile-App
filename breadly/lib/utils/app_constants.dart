@@ -19,7 +19,7 @@ class AppConstants{
   static const String LOGIN_URL = "login";
   static String USER_URL = "users/$USER_ID";
   static String USER_ID = "";
-  static String GOOGLE_MAP_API = "AIzaSyAmy1lKK8VPaBYD-L_ZhiCoQQqW-CukCHI";   
+  static String GOOGLE_MAP_API = "";   
 }
 
 
